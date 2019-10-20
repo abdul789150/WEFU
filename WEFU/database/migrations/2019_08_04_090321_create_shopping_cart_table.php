@@ -20,6 +20,7 @@ class CreateShoppingCartTable extends Migration
             $table->integer('quantity');
             $table->timestamps();
         });
+        
     }
 
     /**

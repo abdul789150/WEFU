@@ -20,6 +20,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/profile/{username}', 'ProfileController@index')->name('profile');
 Route::get('/profile/newAddress/{username}', 'ProfileController@address_page')->name('addAddressPage');
+Route::get('/cart/{username}','CartController@cart')->name('cart');
+
 
 Route::post('/profile/update/{username}', 'ProfileController@dataUpdate')->name('profileUpdate');
 Route::post('/profile/addAddress/{username}', 'ProfileController@add_address')->name('insertAddress');

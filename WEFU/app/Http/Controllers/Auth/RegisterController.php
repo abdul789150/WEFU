@@ -54,7 +54,7 @@ class RegisterController extends Controller
             'username' => 'required|string|max:191|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ]);
-    }
+    } 
 
     /**
      * Create a new user instance after a valid registration.
