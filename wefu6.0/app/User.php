@@ -46,4 +46,11 @@ class User extends Authenticatable
         return $this->hasMany(Address::class, 'user_id');
     }
 
+    public function extension_cart(){
+        return $this->hasMany(ExtensionCart::class, 'user_id');
+    }
+
+    public function orders(){
+        return $this->hasMany(Orders::class, 'user_id');
+    }
 }

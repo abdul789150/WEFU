@@ -46,7 +46,7 @@
                             <img src="{{ URL::to('/storage/uploads/profile_pic/'.$user[0]->profile_img) }}" alt="placeholder" class="rounded-circle mr-5" width="100px" height="100px"  />
                         </p>
                         <div class="form-group col">
-                            <label for="profile_img" class="btn btn-light border"> <i class="fa fa-cloud-upload"></i><strong> Upload Image</strong> </label>
+                            <label for="profile_img" class="btn btn-light"> <i class="fa fa-cloud-upload"></i><strong> Upload Image</strong> </label>
                             <input type="file" class="icon-upload" id="profile_img" name="profile_img">
                             <br>
                             @if ($errors->has('profile_img'))

@@ -16,10 +16,11 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->unsignedInteger('pp_id');
-            $table->decimal('total_price', 8, 2);
-            $table->boolean('payment_completed');
-            $table->boolean('is_delivered');
+            $table->unsignedInteger('pp_id')->nullable();
+            $table->unsignedInteger('address_id')->nullable();
+            $table->decimal('total_price', 8, 2)->nullable();
+            $table->boolean('payment_completed')->nullable();
+            $table->boolean('is_delivered')->nullable();
             $table->timestamps();
         });
     }

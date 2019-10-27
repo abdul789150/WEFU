@@ -41,6 +41,9 @@ class CreateExtCartTable extends Migration
             $table->string('price');
             $table->string('condition')->nullable();
             $table->string('seller_info')->nullable();
+
+            $table->unsignedInteger('quantity')->default(1);
+
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');

@@ -58,7 +58,7 @@ class LoginController extends Controller
         
         // If any of those conditions were true
         if( Auth::check() ){
-            return redirect()->intended('home');
+            return redirect()->intended('/home');
         }
         
         return redirect()->back()->withErrors( [

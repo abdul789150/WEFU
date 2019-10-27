@@ -1,4 +1,5 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Nunito);
+/* @charset "UTF-8"; */
 
 /*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
@@ -70,9 +71,9 @@ body {
   font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.6;
-  color: #212529;
+  color: #1c1e20;
   text-align: left;
-  background-color: #f8fafc;
+  background-color: rgb(255, 255, 255);
 }
 
 [tabindex="-1"]:focus {
@@ -173,6 +174,17 @@ a {
   color: #3490dc;
   text-decoration: none;
   background-color: transparent;
+}
+
+.a-white{
+  color: #ffffff;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.a-white:hover{
+  color: #ffffff;
+  text-decoration: none;
 }
 
 a:hover {
@@ -1627,12 +1639,12 @@ pre code {
 .table td {
   padding: 0.75rem;
   vertical-align: top;
-  border-top: 1px solid #dee2e6;
+  border-top: 1px solid #ffffff;
 }
 
 .table thead th {
   vertical-align: bottom;
-  border-bottom: 2px solid #dee2e6;
+  border-bottom: 2px solid #ffffff;
 }
 
 .table tbody + tbody {

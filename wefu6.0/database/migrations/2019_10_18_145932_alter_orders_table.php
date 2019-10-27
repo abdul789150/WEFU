@@ -17,6 +17,7 @@ class AlterOrdersTable extends Migration
         Schema::table('orders', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('pp_id')->references('id')->on('pricing_plans')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('address_id')->references('id')->on('address')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

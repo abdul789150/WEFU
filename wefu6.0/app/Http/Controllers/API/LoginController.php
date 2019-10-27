@@ -34,7 +34,7 @@ class LoginController extends Controller
         if( Auth::check() ){
             $user = Auth::user();
             $success['token'] = $user->createToken('WEFU Password Grant Client')->accessToken;
-            return response()->json(['success' => $success], $this->success_status);
+            return response()->json(['success' => $success, 'user' => $user], $this->success_status);
         }
         
         return response()->json(['error' => 'Email/Username or Password Error'], $this->unauth_error);

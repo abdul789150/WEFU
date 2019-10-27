@@ -18,6 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/login', 'API\LoginController@login');
+Route::post('/signup', 'API\RegisterController@register');
 Route::middleware('auth:api')->post('/addToCart', 'API\CartController@add_to_cart');
 Route::middleware('auth:api')->post('/delete', 'API\CartController@delete_from_cart');
 Route::middleware('auth:api')->post('/products', 'API\CartController@products_in_cart');
+Route::middleware('auth:api')->post('/updateImage', 'API\UserController@update_image');

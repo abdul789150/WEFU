@@ -12,7 +12,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{{ asset('css/app1.css') }}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
 <div id="app">
@@ -62,7 +63,7 @@
 
     {{-- Side bar --}}
     @if (Auth::user())
-        <div class="col-md-2 align-items-strech flex-column float-left border-right-2 border-bottom-2 vh-100">
+        <div class="col-lg-2 align-items-strech flex-column float-left border-right-2 border-bottom-2 vh-100">
 
             <div class="user_profile pt-3 pl-5">
                 <img src="{{ URL::to('/storage/uploads/profile_pic/'.Auth::user()->profile_img) }} " alt="placeholder" class="rounded-circle" width="100px" height="100px"  />
@@ -88,7 +89,7 @@
                     @yield('home')
 
                     <li> <a href="{{ route('cart', $username) }}"> Shopping Cart</a></li>
-                    <li> <a href="#"> Orders</a></li>
+                    <li> <a href="{{ route('ordersIndex') }}"> Orders</a></li>
                     <li> <a href="#"> Pricing Plans</a></li>
                     <li> <a href="#"> Payment</a></li>
                     <li>
