@@ -2562,6 +2562,7 @@ textarea.form-control.is-invalid {
   box-shadow: 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
 }
 
+
 .btn.disabled,
 .btn:disabled {
   opacity: 0.65;

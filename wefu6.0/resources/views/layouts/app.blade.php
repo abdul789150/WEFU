@@ -119,5 +119,20 @@
 
 <!-- Scripts -->
 <script src="{{ asset('js/bootstrap.js') }}"></script>
+<script>
+    var weekdays = new Array(
+        "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+    );
+
+    var month_names = new Array(
+        "January", "Feburary", "March", "April", "May", "June", "July", "August", "September",
+        "October", "November", "December"  
+    );
+
+    function numberWithCommas(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+</script>
 </body>
 </html>

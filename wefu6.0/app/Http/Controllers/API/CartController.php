@@ -35,7 +35,7 @@ class CartController extends Controller
 
         $extension_cart->save();
 
-        return response()->json(['Success' => 'Added to cart'], 200);
+        return response()->json(['success' => 'Added to cart'], 200);
     }
 
     public function delete_from_cart(Request $request){

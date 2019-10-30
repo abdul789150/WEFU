@@ -72,7 +72,7 @@
                 <div class="m-5 border-top">
                     <div class="d-flex pt-3">
                         <div class="border-right">
-                            <div class="pl-4 pr-5">
+                            <div class="pl-2 pr-3">
                                 <p>Delivered to your door by <br>
                                 <span class="font-weight-bold" id="shippment_day"></span>
                                 </p>
@@ -85,9 +85,16 @@
                             </p>
                         </div>
 
-                        <div class="ml-5 pl-4 pt-2">
-                            <button type="submit" class="btn btn-outline-primary p-2 rounded-pill">Confirm Order<i class="fa fa-long-arrow-right pl-1"></i></button>
-                        </div>
+                        <form role="form" method="post" action="{{route('selectedPricingPlan')}}">
+                            @csrf
+                            <input id="address_id" type="text" name="address_id" value="{{$address->id}}" hidden>
+                            <input id="pp_id" type="text" name="pp_id" value="" hidden>
+
+                            <div class="ml-5 pl-4 pt-2">
+                                <button class="btn btn-outline-purple p-2 rounded-pill" type="submit" >Confirm Order<i class="fa fa-long-arrow-right pl-1"></i></button>
+                            </div>
+
+                        </form>
 
                     </div>
                 </div>
@@ -151,23 +158,10 @@
     
     window.onload = function(){
         
-        function numberWithCommas(number) {
-            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        }
-
-
         document.getElementById("subtotal_price").innerHTML = "<b>PKR</b> " + numberWithCommas({{$total_price}});
 
         var pricing_array = @json($pricing_plans);
         var value = $("input:radio[name='pricing_selected_option']:checked").val();
-        var weekdays = new Array(
-            "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
-        );
-
-        var month_names = new Array(
-            "January", "Feburary", "March", "April", "May", "June", "July", "August", "September",
-            "October", "November", "December"  
-        );
 
         pricing_array.forEach(element => {
             if(element["id"] == value){
@@ -181,6 +175,8 @@
                 // console.log(weekdays[delivery_date.getDay()]);
                 // console.log(delivery_date.getDate())
                 document.getElementById('shippment_day').innerHTML = weekdays[delivery_date.getDay()] + ", " + month_names[delivery_date.getMonth()] + " " + delivery_date.getDate();
+            
+                document.getElementById("pp_id").value = element["id"]
             }
         });
 
@@ -197,6 +193,7 @@
                     delivery_date.setDate(delivery_date.getDate() + parseInt(element["delivery_days"]));
                     document.getElementById('shippment_day').innerHTML = weekdays[delivery_date.getDay()] + ", " + month_names[delivery_date.getMonth()] + " " + delivery_date.getDate();
 
+                    document.getElementById("pp_id").value = element["id"]
                 }
             });
         });
