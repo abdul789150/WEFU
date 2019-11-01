@@ -19,8 +19,8 @@ class CreateOrdersTable extends Migration
             $table->unsignedInteger('pp_id')->nullable();
             $table->unsignedInteger('address_id')->nullable();
             $table->decimal('total_price', 8, 2)->nullable();
-            $table->boolean('payment_completed')->nullable();
-            $table->boolean('is_delivered')->nullable();
+            $table->boolean('payment_completed')->default(false);
+            $table->boolean('is_delivered')->default(false);
             $table->timestamps();
         });
     }

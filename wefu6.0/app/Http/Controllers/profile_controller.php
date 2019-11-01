@@ -114,7 +114,7 @@ class profile_controller extends Controller
         $user = User::where('username', $username)->get();
         // dd($user);
 
-        return view('customer_portal.add_address', [
+        return view('customer_portal.address.add_address', [
             'user' => $user,
         ]);
     

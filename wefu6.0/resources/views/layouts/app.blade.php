@@ -14,10 +14,11 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app1.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
 </head>
 <body>
 <div id="app">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light vw-100">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
                 {{-- {{ config('app.name', 'APP_NAME') }} --}}

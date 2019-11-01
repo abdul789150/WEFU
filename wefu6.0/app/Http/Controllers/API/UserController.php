@@ -135,4 +135,19 @@ class UserController extends Controller
         return response()->json(['user' => $user], $this->success_status);
     }
 
+
+
+    public function get_addresses(){
+        $addresses = Address::where('user_id', Auth::user()->id)->get();
+
+        if($addresses->count() == 0){
+            return response()->json(['error' => 'No address Found'], $this->unauth_error);
+        }
+
+        return response()->json(['address' => $addresses], $this->success_status);
+    }
+
+
+
+
 }

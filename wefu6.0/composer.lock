@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4f2bf2cc41af58a720a6d927ec90a53a",
+    "content-hash": "b79cda3439175663d42c034c1f74a414",
     "packages": [
         {
             "name": "defuse/php-encryption",
@@ -1450,16 +1450,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.25.2",
+            "version": "2.25.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "443fe5f1498147e0fbc792142b5dc43e2e8a533f"
+                "reference": "d07636581795383e2fea2d711212d30f941f2039"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/443fe5f1498147e0fbc792142b5dc43e2e8a533f",
-                "reference": "443fe5f1498147e0fbc792142b5dc43e2e8a533f",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/d07636581795383e2fea2d711212d30f941f2039",
+                "reference": "d07636581795383e2fea2d711212d30f941f2039",
                 "shasum": ""
             },
             "require": {
@@ -1513,7 +1513,7 @@
                 "datetime",
                 "time"
             ],
-            "time": "2019-10-14T14:18:59+00:00"
+            "time": "2019-10-20T11:05:44+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -2255,6 +2255,74 @@
                 "uuid"
             ],
             "time": "2018-07-19T23:38:55+00:00"
+        },
+        {
+            "name": "spatie/laravel-permission",
+            "version": "3.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-permission.git",
+                "reference": "e3821559c69b2b1ea8fdd967fa89ba13a01ead78"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/e3821559c69b2b1ea8fdd967fa89ba13a01ead78",
+                "reference": "e3821559c69b2b1ea8fdd967fa89ba13a01ead78",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/auth": "^5.8|^6.0",
+                "illuminate/container": "^5.8|^6.0",
+                "illuminate/contracts": "^5.8|^6.0",
+                "illuminate/database": "^5.8|^6.0",
+                "php": "^7.2"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^3.8|^4.0",
+                "phpunit/phpunit": "^8.0",
+                "predis/predis": "^1.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\Permission\\PermissionServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Permission\\": "src"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Permission handling for Laravel 5.8 and up",
+            "homepage": "https://github.com/spatie/laravel-permission",
+            "keywords": [
+                "acl",
+                "laravel",
+                "permission",
+                "permissions",
+                "rbac",
+                "roles",
+                "security",
+                "spatie"
+            ],
+            "time": "2019-10-16T19:25:56+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

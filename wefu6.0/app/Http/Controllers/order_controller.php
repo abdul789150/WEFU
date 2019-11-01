@@ -10,6 +10,7 @@ use App\PricingPlans;
 use App\Products;
 use App\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session as IlluminateSession;
 use Illuminate\Support\Facades\Session as IlluminateSupportSession;
@@ -24,12 +25,7 @@ class order_controller extends Controller
     }
 
     public function index(){
-
-        $user = User::where('id', Auth::user()->id)->get();
-
-        return view('customer_portal.orders', [
-            'user' => $user,
-        ]);
+        return view('customer_portal.orders.orders_index');
     }
 
 
@@ -37,7 +33,7 @@ class order_controller extends Controller
         
         $user = User::where('id', Auth::user()->id)->get();
         
-        return view('customer_portal.shippment_details',[
+        return view('customer_portal.orders.shippment_details',[
             'user' => $user,
         ]);
     }
@@ -132,7 +128,7 @@ class order_controller extends Controller
             
         }
 
-        return view('customer_portal.shipping_option',[
+        return view('customer_portal.orders.shipping_option',[
             'pricing_plans' => $pricing_plans,
             'total_price' => $total_price,
             'total_products' => $total_products,
@@ -175,7 +171,7 @@ class order_controller extends Controller
         // $total_price = number_format($total_price);
         // dd($products_pkr_price);
 
-        return view('customer_portal.order_confirmation',[
+        return view('customer_portal.orders.order_confirmation',[
             'cart_products' => $cart_products,
             'pricing_plan' => $pricing_plan,
             'total_price' => $total_price,
@@ -193,7 +189,7 @@ class order_controller extends Controller
         ]);
 
         if($validator->fails()){
-            return response()->json(['error' => 'Email/Username or Password Error'], 401);
+            return response()->json(['error' => 'Sorry unable to place order'], 401);
         }    
 
         // $address = Address::where('id', 'address_id')->get();
@@ -223,7 +219,8 @@ class order_controller extends Controller
                     
                     $pkr_price = $pkr_price * 150;
 
-                    // Mulitply price with quantity; 
+                    // Mulitply price with quantity;
+                    // dd($value->quantity); 
                     $pkr_price = $pkr_price * $value->quantity;
 
                     $total_price = $total_price + $pkr_price;
@@ -251,4 +248,61 @@ class order_controller extends Controller
 
         return response()->json(['success' => 'Order confirmed'], 200);
     }
+
+
+    public function completed_orders(){
+
+        $completed_orders = Orders::where('user_id', Auth::user()->id)
+                                    ->where('payment_completed', true)
+                                    ->where('is_delivered', true)->get();
+
+        // dd($completed_orders);
+        // $date_time = Carbon::parse($completed_orders[0]->created_at);
+        // For date $date_time->toFormattedDateString()
+        // For time $date_time->format("h:i A") 
+        // dd();
+
+        for ($i=0; $i < $completed_orders->count(); $i++) { 
+            $date_time = Carbon::parse($completed_orders[$i]->created_at);
+            $completed_orders[$i]->date = $date_time->day."/".$date_time->month."/".$date_time->year;
+            $completed_orders[$i]->time = $date_time->format("h:i");
+            $completed_orders[$i]->midday_val = $date_time->format("A");
+            $completed_orders[$i]->formatted_price = number_format($completed_orders[$i]->total_price);
+            // dd($completed_orders[$i]->midday_val);
+        }
+
+        return view("customer_portal.orders.completed_orders",[
+            'completed_orders' => $completed_orders,
+        ]);
+    }
+ 
+    public function incomplete_orders(){
+
+        $incomplete_orders = Orders::where('user_id', Auth::user()->id)
+                                        ->where('payment_completed', false)
+                                        ->orWhere('is_delivered', false)->get();
+
+
+        // dd($incomplete_orders);
+
+        for ($i=0; $i < $incomplete_orders->count(); $i++) { 
+            $date_time = Carbon::parse($incomplete_orders[$i]->created_at);
+            $incomplete_orders[$i]->date = $date_time->day."/".$date_time->month."/".$date_time->year;
+            $incomplete_orders[$i]->time = $date_time->format("h:i");
+            $incomplete_orders[$i]->midday_val = $date_time->format("A");
+            $incomplete_orders[$i]->formatted_price = number_format($incomplete_orders[$i]->total_price);
+            // dd($completed_orders[$i]->midday_val);
+        }
+
+
+        return view("customer_portal.orders.incomplete_orders",[
+            'incomplete_orders' => $incomplete_orders,
+        ]);
+    }
+
+
+
+
+
+
 }

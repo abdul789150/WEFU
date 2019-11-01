@@ -27,3 +27,4 @@ Route::middleware('auth:api')->post('/newAddress', 'API\UserController@add_new_a
 Route::middleware('auth:api')->post('/updateInfo', 'API\UserController@update_info');
 Route::middleware('auth:api')->post('/updatePassword', 'API\UserController@update_password');
 Route::middleware('auth:api')->post('/completeRegistration', 'API\UserController@complete_registration');
+Route::middleware('auth:api')->post('/addresses','API\UserController@get_addresses');

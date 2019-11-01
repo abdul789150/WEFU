@@ -180,7 +180,7 @@
                 </div>
                 <div class="mt-2">
                     <div class="float-left mt-2">
-                        <a href="#" class="btn btn-purple ml-2">Pay Later</a>
+                        <a href="#" class="btn btn-outline-purple ml-2">Pay Later</a>
                     </div>
                     <div class="float-right mt-2">
                         <a href="#" class="btn btn-orange mr-2">Pay Now</a>
@@ -225,7 +225,7 @@
 <script>
 
     window.onload = function(){
-        $("#confirmationModel").modal('show');
+        // $("#confirmationModel").modal('show');
         document.getElementById("total_price").innerHTML = "PKR " + numberWithCommas({{$total_price}})
         document.getElementById("shippment_fee").innerHTML = "PKR " + numberWithCommas({{$pricing_plan->price}})                
 

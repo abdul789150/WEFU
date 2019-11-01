@@ -25,6 +25,13 @@ Route::get('/orders','order_controller@index')->name('ordersIndex');
 Route::get('/shippmentDetails','order_controller@shippment_details')->name('shippmentDetails');
 Route::get('/shippingOption/{address_id}','order_controller@shipping_option')->name('shippingOption');
 Route::get('/orderConfirmation/{address_id}/{pp_id}', 'order_controller@order_confirmation')->name('orderConfirmation');
+Route::get('/orders/completedOrders', 'order_controller@completed_orders')->name('completedOrders');
+Route::get('/orders/incompleteOrders', 'order_controller@incomplete_orders')->name('incompleteOrders');
+
+
+
+
+
 
 
 Route::post('/profile/update/{username}', 'profile_controller@dataUpdate')->name('profileUpdate');
