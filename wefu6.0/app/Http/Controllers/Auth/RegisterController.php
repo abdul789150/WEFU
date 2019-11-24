@@ -66,12 +66,15 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         // Role_id will be 2 cause it is a customer
-        return User::create([
-            'role_id' => '2',
+        $user = User::create([
             'full_name' => $data['full_name'],
             'email' => $data['email'],
             'username' => $data['username'],
             'password' => bcrypt($data['password']),
         ]);
+        
+        $user->assignRole('customer');    
+
+        return $user;
     }
 }

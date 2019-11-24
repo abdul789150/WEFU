@@ -43,7 +43,7 @@ class order_controller extends Controller
         $data = $request->all();
 
         // Redirect Remains
-        return redirect('shippingOption/'.$data["selected_address"]);
+        return redirect('/customer/shippingOption/'.$data["selected_address"]);
 
     }
 
@@ -80,7 +80,7 @@ class order_controller extends Controller
             
             $address->save();
 
-            return redirect('shippingOption/'.$address->id);
+            return redirect('/customer/shippingOption/'.$address->id);
 
         }else{
 
@@ -101,7 +101,7 @@ class order_controller extends Controller
 
             $address->save();
   
-            return redirect('shippingOption/'.$address->id);
+            return redirect('/customer/shippingOption/'.$address->id);
         }
 
     }
@@ -139,7 +139,7 @@ class order_controller extends Controller
     public function selected_pricing_plan(Request $request){
         // dd($request->all());
         $data = $request->all();
-        return redirect('orderConfirmation/'.$data["address_id"].'/'.$data["pp_id"]);
+        return redirect('/customer/orderConfirmation/'.$data["address_id"].'/'.$data["pp_id"]);
     }
 
 

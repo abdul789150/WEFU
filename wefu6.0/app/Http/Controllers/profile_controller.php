@@ -65,7 +65,7 @@ class profile_controller extends Controller
             $validator = Validator::make($request->all() ,[
                 'full_name' => 'required|string|max:191',
                 'email' => 'nullable|string|email|max:191|unique:users',
-                'phone_no' => 'nullable|max:11',
+                'phone_no' => 'nullable|max:11|digits:11',
                 'profile_img' => 'required',
                 'profile_img.*' => 'mimes:jpg,jpeg,png,bmp,tiff',
             ]);
@@ -75,7 +75,7 @@ class profile_controller extends Controller
             $validator = Validator::make($request->all() ,[
                 'full_name' => 'required|string|max:191',
                 'email' => 'nullable|string|email|max:191|unique:users',
-                'phone_no' => 'nullable|max:11',
+                'phone_no' => 'nullable|max:11|digits:11',
             ]);
         }
 

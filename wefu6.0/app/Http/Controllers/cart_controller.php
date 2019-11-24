@@ -103,13 +103,13 @@ class cart_controller extends Controller
 
         $cart_products = ExtensionCart::where('user_id', Auth::user()->id)->get();
         $data = $request->all();
-
+        
         foreach ($cart_products as $key => $value) {
             $value->quantity = $data["quantity"][$value->id];
             $value->save();
         }
 
-        return redirect('/shippmentDetails');
+        return redirect('/customer/shippmentDetails');
     }    
 
 

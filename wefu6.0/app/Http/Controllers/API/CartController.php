@@ -30,7 +30,9 @@ class CartController extends Controller
 
         $extension_cart->user_id = $user_id;
         foreach ($data as $key => $value) {
-            $extension_cart->$key = $value;
+            if($key != "stock"){
+                $extension_cart->$key = $value;
+            }
         }
 
         $extension_cart->save();

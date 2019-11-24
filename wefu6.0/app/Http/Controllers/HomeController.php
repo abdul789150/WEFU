@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\TopProducts;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('customer_portal.home');
+
+        $top_products = TopProducts::orderBy('rating', 'desc')->get();
+
+        // dd($top_products);
+
+        return view('customer_portal.home',[
+            "top_products" => $top_products,
+        ]);
     }
 }

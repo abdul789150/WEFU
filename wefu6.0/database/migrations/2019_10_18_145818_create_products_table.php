@@ -36,7 +36,7 @@ class CreateProductsTable extends Migration
             $table->string('band_color')->nullable();
             $table->string('dial_color')->nullable();
             // Seller
-            $table->decimal('price', 8, 2);
+            $table->decimal('price', 16, 2);
             $table->string('condition');
             $table->string('seller_info');
             $table->timestamps();

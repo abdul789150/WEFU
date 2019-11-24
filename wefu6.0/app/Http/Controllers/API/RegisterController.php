@@ -65,13 +65,13 @@ class RegisterController extends Controller
 
         $data = $request->all();
 
-        $user = new User();
-        $user->role_id = 2;
-        $user->full_name = $data["full_name"];
-        $user->email = $data["email"];
-        $user->password = Hash::make($data["password"]);
-
-        $user->save();
+        $user = User::create([
+            'full_name' => $data['full_name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+        ]);
+        
+        $user->assignRole('customer');   
 
         $success['token'] = $user->createToken('WEFU Password Grant Client')->accessToken;
         return response()->json(['success' => $success], $this->success_status);
@@ -86,12 +86,15 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         // Role_id will be 2 cause it is a customer
-        return User::create([
-            'role_id' => '2',
+        $user = User::create([
             'full_name' => $data['full_name'],
             'email' => $data['email'],
             'username' => $data['username'],
             'password' => bcrypt($data['password']),
         ]);
+        
+        $user->assignRole('customer');    
+
+        return $user;
     }
 }
