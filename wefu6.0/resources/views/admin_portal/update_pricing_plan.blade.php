@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="col-lg-10 float-right">
+    <div class="col-lg-8 custom-radius-dashboard bg-white float-right h-98 mt-1 text-dark">
         <div class="container pt-4">
 
             <h3> <strong> Update Pricing Plans </strong> </h3> 
@@ -13,7 +13,7 @@
             <div class="container col-lg-7">
 
                 <form role="form" method="POST" action="{{route('savePricingPlan')}}">
-
+                    @csrf
                     <table class="table table-hover all-orders-table">
                         <thead class="text-muted">
                             <tr>
@@ -30,10 +30,10 @@
                                         <span>{{$plan->name}}</span>
                                     </th>
                                     <td>
-                                        <input type="text" class="form-control col-lg-6 m-auto" name="delivery_date" id="delivery_date" value="{{$plan->delivery_days}}">
+                                        <input type="text" class="form-control col-lg-6 m-auto" name="delivery_date[{{$plan->id}}]" id="delivery_date" value="{{$plan->delivery_days}}">
                                     </td>
                                     <td>
-                                        <input type="text" class="form-control col-lg-6 m-auto" name="price" id="price" value="{{$plan->price}}">
+                                        <input type="text" class="form-control col-lg-6 m-auto" name="price[{{$plan->id}}]" id="price" value="{{$plan->price}}">
                                     </td>
                                 </tr>                                
                             @endforeach
@@ -63,3 +63,10 @@
     </div>
 
 @endsection
+
+<script>
+    window.onload = function(){
+        $( "#dashboard-options li" ).removeClass( "dashboard-li-selected" );
+        $( "#UpdatePricingPlan" ).addClass( "dashboard-li-selected" );
+    }
+</script>

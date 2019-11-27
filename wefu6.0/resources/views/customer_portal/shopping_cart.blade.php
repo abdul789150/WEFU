@@ -2,9 +2,11 @@
 
 @section('content')
 
-    <div class="container">
+    <div class="container bg-white col-lg-8 custom-radius-dashboard h-98 mt-1 float-right text-dark">
         
-        <h4><strong>My Cart</strong></h4>
+        <div class="pt-5 pl-5">
+            <h2><strong>My Cart</strong></h2>
+        </div>
 
         @php
             $length = $user[0]->extension_cart->count();    
@@ -18,18 +20,18 @@
         
         @else
             
-            <div id="data" class="p-4">
+            <div id="data" class="p-4 col-lg-12">
 
                 <form role="form" method="POST" action="{{ route('checkout') }}">
                     {!! csrf_field() !!}
 
-                    <table class="table table-borderless col-lg-8">
+                    <table class="table table-borderless">
                         <thead>
                             <tr>
-                                <th colspan="2">Product</th>
-                                <th>Price</th>
+                                <th></th>
+                                <th>Product</th>
                                 <th>Quantity</th>
-                                <th>Total</th>
+                                <th>Price</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -37,46 +39,59 @@
                             
                             @foreach ($user[0]->extension_cart as $item)
                                 <tr>
-                                    <td> <img src="{{$item->product_img_link}}" alt="{{$item->product_name}}" width="100px" height="100px"> </td>
-                                    <td class="d-inline-block text-truncate" style="max-width: 300px;"> {{ $item->product_name }} </td>
+                                    <td> 
+                                        <div class="top-pick-img-div">
+                                            <img src="{{$item->product_img_link}}" alt="{{$item->product_name}}"> 
+                                        </div>
+                                    </td>
+                                    <td class="d-inline-block text-truncate" style="max-width: 350px;"> {{ $item->product_name }} 
+                                        <br/> <span class="text-success">In Stock</span>
+                                    </td>
+                                    <td> <input type="number" class="form-control text-center" name="quantity[{{ $item->id }}]" value="1" max="10" min="1"></td>
                                     <td> {{ $item->price }} </td>
-                                    <td> <input type="number" name="quantity[{{ $item->id }}]" value="1"></td>
-                                    <td> {{ $item->price }} </td>
-                                    <td> <button id="del" class="btn btn-danger">Delete</button> </td>
+                                    <td> <button id="del" class="btn btn-danger"><i class="fa fa-trash-o"></i></button> </td>
                                 </tr>
                             @endforeach
                             
                             <tr>
                                 <td></td>
                                 <td></td>
-                                <td></td>
-                                <th colspan="2" class="border-top">
+                                <th colspan="1" class="border-top">
                                     SubTotal
                                 </th>
-                                <td> $5999</td>
+                                <td class="border-top"> $5999</td>
+                                <td class="border-top">                                    
+                                </td>
                             </tr>
                             <tr>
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td colspan="3">
-                                    <button type="submit" class="btn btn-outline-primary">
+                                <td>
+                                    <button type="submit" class="btn btn-outline-purple">
                                         Checkout
                                     </button>
                                 </td>
+                                <td></td>
                             </tr>
                         </tbody>
                     </table>
+
                 </form>
 
             </div>
 
         @endif
     </div>
-
 @endsection
 
 
 <script>
     // main()
+
+    window.onload = function(){
+        $( "#dashboard-options li" ).removeClass( "dashboard-li-selected" );
+        $( "#cart" ).addClass( "dashboard-li-selected" );
+    }
+
 </script>

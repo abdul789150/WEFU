@@ -271,7 +271,7 @@
 
 
             {{-- This one is for address information --}}
-            <div class="tab-pane fade" id="add_info" role="tabpanel" aria-labelledby="address_tab">
+            <div class="tab-pane fade address-tab-layout" id="add_info" role="tabpanel" aria-labelledby="address_tab">
                 {!! csrf_field() !!}
                 <div class="p-4">
                     <h4><strong>Your Addresses</strong></h4>

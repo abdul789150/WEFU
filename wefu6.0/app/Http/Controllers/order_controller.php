@@ -25,7 +25,39 @@ class order_controller extends Controller
     }
 
     public function index(){
-        return view('customer_portal.orders.orders_index');
+        $completed_orders = Orders::where('user_id', Auth::user()->id)
+        ->where('payment_completed', true)
+        ->where('is_delivered', true)->get();
+
+
+        for ($i=0; $i < $completed_orders->count(); $i++) { 
+            $date_time = Carbon::parse($completed_orders[$i]->created_at);
+            $completed_orders[$i]->date = $date_time->day."/".$date_time->month."/".$date_time->year;
+            $completed_orders[$i]->time = $date_time->format("h:i");
+            $completed_orders[$i]->midday_val = $date_time->format("A");
+            $completed_orders[$i]->formatted_price = number_format($completed_orders[$i]->total_price);
+            // dd($completed_orders[$i]->midday_val);
+        }
+
+        $incomplete_orders = Orders::where('user_id', Auth::user()->id)
+        ->where('payment_completed', false)
+        ->orWhere('is_delivered', false)->get();
+
+        // dd($incomplete_orders);
+
+        for ($i=0; $i < $incomplete_orders->count(); $i++) { 
+            $date_time = Carbon::parse($incomplete_orders[$i]->created_at);
+            $incomplete_orders[$i]->date = $date_time->day."/".$date_time->month."/".$date_time->year;
+            $incomplete_orders[$i]->time = $date_time->format("h:i");
+            $incomplete_orders[$i]->midday_val = $date_time->format("A");
+            $incomplete_orders[$i]->formatted_price = number_format($incomplete_orders[$i]->total_price);
+            // dd($completed_orders[$i]->midday_val);
+        }
+
+        return view('customer_portal.orders.orders_index',[
+            "completed_orders" => $completed_orders,
+            "incomplete_orders" => $incomplete_orders,
+        ]);
     }
 
 

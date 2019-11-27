@@ -2,152 +2,151 @@
 
 @section('content')
 
-    <div class="col-lg-10 float-right">
+    <div class="col-lg-8 bg-white custom-radius-dashboard h-98 mt-1 float-right text-dark">
         <div class="p-4 pl-4">
             <h3><strong>Order Confirmation</strong></h3>
             <p>Thanks for your order!</p>
         </div>
 
-    </div>
 
-    <div class="container mt-5">
+        <div class="mt-n1">
 
-        <div class="col-lg-10 float-right shadow custom-radius">
+            <div class="col-lg-12 float-right shadow custom-radius">
 
-            <div class="pt-4">
-                
-                <div class="p-2">
+                <div class="pt-2">
                     
-                    <div class="col-lg-8 float-left border-right rounded">
-    
-                        <h3>Order Details</h3>
-    
-                        <div class="confirm-table-div pt-1" id="scroll-bar">
-                            <table class="table table-borderless table-sm" style="font-size: 0.9rem;">
-                                <tr class="confirm-tr border-bottom">
-                                    <th class="text-muted">#</th>
-                                    <th class="text-muted">Description</th>
-                                    <th class="text-muted">Quantity</th>
-                                    <th class="text-muted">Price</th>
-                                </tr>
+                    <div class="p-2">
+                        
+                        <div class="col-lg-8 float-left border-right rounded">
         
-                                @php
-                                    $i = 1;
-                                @endphp                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+                            <h3>Order Details</h3>
         
-                                @foreach ($cart_products as $item)
-                                    
-                                    <tr class="confirm-tr confirm-tr-products border-bottom">
-                                        <td class="text-muted">{{$i}}</td>
-                                        <td>
-                                            <div class="d-flex pl-3">
-                                                <div class="img-container">
-                                                    <img src="{{$item->product_img_link}}" alt="{{$item->product_name}}">
-                                                </div>
-                                                <p class="d-inline-block text-truncate font-weight-bold pl-3" style="max-width: 180px; font-size: 0.85rem;">
-                                                    {{$item->product_name}}
-                                                </p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            {{$item->quantity}}x
-                                        </td>
-                                        <td>
-                                            <b>PKR</b> {{$products_pkr_price[$item->id]}}
-                                        </td>
+                            <div class="confirm-table-div pt-1" id="scroll-bar">
+                                <table class="table table-borderless table-sm" style="font-size: 0.9rem;">
+                                    <tr class="confirm-tr border-bottom">
+                                        <th class="text-muted">#</th>
+                                        <th class="text-muted">Description</th>
+                                        <th class="text-muted">Quantity</th>
+                                        <th class="text-muted">Price</th>
                                     </tr>
             
                                     @php
-                                        $i = $i + 1;                                
-                                    @endphp
-        
-                                @endforeach
-        
-                            </table>
-                            
-                        </div>
-    
-                    </div>
-        
-                    <div class="col-lg-4 float-right">
-                        <h4>Order Summary</h4>
-                        
-                        <div class="confirm-order-summary">
-                            <table class="table table-borderless table-sm" style="font-size: 0.87rem;">
-                                <tr>
-                                    <th class="text-muted">Total Items</th>
-                                    <td>{{$total_products}}</td>
-                                </tr>
-                                <tr>
-                                    <th class="text-muted">Products Price</th>
-                                    <td id="total_price"></td>
-                                </tr>
-                                <tr>
-                                    <th class="text-muted">Custom Tax Total</th>
-                                    <td>PKR 1,499</td>
-                                </tr>
-                                <tr class="border-bottom">
-                                    <th class="text-muted">Shippment Fee</th>
-                                    <td id="shippment_fee"></td>
-                                </tr>
-                                <tr>
-                                    <th class="text-muted pt-3">Order Total</th>
-                                    <td id="order_total_price" class="pt-3"></td>
-                                </tr>
-    
-                            </table>
+                                        $i = 1;
+                                    @endphp                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+            
+                                    @foreach ($cart_products as $item)
+                                        
+                                        <tr class="confirm-tr confirm-tr-products border-bottom">
+                                            <td class="text-muted">{{$i}}</td>
+                                            <td>
+                                                <div class="d-flex pl-3">
+                                                    <div class="img-container">
+                                                        <img src="{{$item->product_img_link}}" alt="{{$item->product_name}}">
+                                                    </div>
+                                                    <p class="d-inline-block text-truncate font-weight-bold pl-3" style="max-width: 180px; font-size: 0.85rem;">
+                                                        {{$item->product_name}}
+                                                    </p>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                {{$item->quantity}}x
+                                            </td>
+                                            <td>
+                                                <b>PKR</b> {{$products_pkr_price[$item->id]}}
+                                            </td>
+                                        </tr>
+                
+                                        @php
+                                            $i = $i + 1;                                
+                                        @endphp
+            
+                                    @endforeach
+            
+                                </table>
                                 
-                            {{-- Another table --}}
-                            <table class="table table-borderless table-sm" style="font-size: 0.87rem;">
-                                <tr>
-                                    <th class="">We will deliver to</th>
-                                </tr>
-                                <tr>
-                                    <th class="text-muted">
-                                        {{$address->user->full_name}}<br>
-                                        {{$address->delivery_address}}, <br>
-                                        {{$address->city}} - {{$address->zipcode}} <br>
-                                        Pakistan <br>
-                                        {{$address->user->phone_no}}
-                                    </th>
-                                </tr>
-                            </table>
-    
+                            </div>
+        
                         </div>
-                        {{-- <hr> --}}
-                        <div class="p-1 float-right">
-                            <button id="place_order" class="btn btn-outline-purple p-2">
-                                Place Order
-                            </button>
+            
+                        <div class="col-lg-4 float-right">
+                            <h4>Order Summary</h4>
+                            
+                            <div class="confirm-order-summary">
+                                <table class="table table-borderless table-sm" style="font-size: 0.80rem;">
+                                    <tr>
+                                        <th class="text-muted">Total Items</th>
+                                        <td>{{$total_products}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-muted">Products Price</th>
+                                        <td id="total_price"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-muted">Custom Tax Total</th>
+                                        <td>PKR 1,499</td>
+                                    </tr>
+                                    <tr class="border-bottom">
+                                        <th class="text-muted">Shippment Fee</th>
+                                        <td id="shippment_fee"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-muted pt-2">Order Total</th>
+                                        <td id="order_total_price" class="pt-2"></td>
+                                    </tr>
+        
+                                </table>
+                                    
+                                {{-- Another table --}}
+                                <table class="table table-borderless table-sm" style="font-size: 0.80rem;">
+                                    <tr>
+                                        <th class="">We will deliver to</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-muted">
+                                            {{$address->user->full_name}}<br>
+                                            {{$address->delivery_address}}, <br>
+                                            {{$address->city}} - {{$address->zipcode}} <br>
+                                            Pakistan <br>
+                                            {{$address->user->phone_no}}
+                                        </th>
+                                    </tr>
+                                </table>
+        
+                            </div>
+                            {{-- <hr> --}}
+                            <div class="mt-5 float-right">
+                                <button id="place_order" class="btn btn-outline-purple p-2">
+                                    Place Order
+                                </button>
+                            </div>
+
                         </div>
+                        
+                        <div class="col-lg-8 float-left">
+                            <div class="p-4 mt-1">
+                                <p>
+                                    Delivered to your door by <br>
+                                    <span class="font-weight-bold" id="shippment_day"></span>
+                                </p>
+
+                            </div>
+                        </div>
+
+
 
                     </div>
                     
-                    <div class="col-lg-8 float-left">
-                        <div class="p-4 mt-1">
-                            <p>
-                                Delivered to your door by <br>
-                                <span class="font-weight-bold" id="shippment_day"></span>
-                            </p>
-
-                        </div>
-                    </div>
-
-
-
+        
                 </div>
-                
-    
+        
             </div>
-    
+
         </div>
-
     </div>
-
 
     {{-- ///////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\ --}}
     <!-- Modal -->
-    <div class="modal fade" id="confirmationModel" tabindex="-1" role="dialog" aria-labelledby="confirmationModelTitle" aria-hidden="true">
+    <div class="modal fade text-dark" id="confirmationModel" tabindex="-1" role="dialog" aria-labelledby="confirmationModelTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header modal-header">
@@ -180,7 +179,7 @@
                 </div>
                 <div class="mt-2">
                     <div class="float-left mt-2">
-                        <a href="#" class="btn btn-outline-purple ml-2">Pay Later</a>
+                        <a href="{{route('home')}}" class="btn btn-outline-purple ml-2">Pay Later</a>
                     </div>
                     <div class="float-right mt-2">
                         <a href="#" class="btn btn-orange mr-2">Pay Now</a>
@@ -192,7 +191,7 @@
     </div>
 
     {{-- Error Modal --}}
-    <div class="modal fade" id="errorModel" tabindex="-1" role="dialog" aria-labelledby="errorModelTitle" aria-hidden="true">
+    <div class="modal fade text-dark" id="errorModel" tabindex="-1" role="dialog" aria-labelledby="errorModelTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
             <div class="modal-body">
@@ -225,6 +224,9 @@
 <script>
 
     window.onload = function(){
+        $( "#dashboard-options li" ).removeClass( "dashboard-li-selected" );
+        $( "#cart" ).addClass( "dashboard-li-selected" );
+
         // $("#confirmationModel").modal('show');
         document.getElementById("total_price").innerHTML = "PKR " + numberWithCommas({{$total_price}})
         document.getElementById("shippment_fee").innerHTML = "PKR " + numberWithCommas({{$pricing_plan->price}})                
@@ -246,7 +248,12 @@
                 data: form_data,
                 cache: false,
                 success: function(result){
+                    $('#confirmationModel').modal({
+                        backdrop: 'static',
+                        keyboard: false
+                    })
                     $("#confirmationModel").modal('show');
+                    
                     $(".check-icon").hide();
                     setTimeout(function () {
                         $(".check-icon").show();

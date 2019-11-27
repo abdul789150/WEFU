@@ -48,7 +48,7 @@ class CartController extends Controller
             $product = ExtensionCart::find($product_id);
             if($product != null){
                 $product->delete();
-                return response()->json(['success' => 'Prodcut deleted fom cart'], 200);
+                return response()->json(['success' => 'Product deleted fom cart'], 200);
             }
         }
 
@@ -58,5 +58,34 @@ class CartController extends Controller
 
     public function update_product(){    }
 
+
+    public function android_add_to_cart(Request $request){
+        
+        $user_id = Auth::user()->id;
+        
+        $data = $request->all();
+        $extension_cart = new ExtensionCart();
+
+        $extension_cart->user_id = $user_id;
+        foreach ($data as $key => $value) {
+
+            if($key != "stock"){
+                $extension_cart->$key = $value;
+            }
+        }
+
+        $extension_cart->save();
+
+        return response()->json(['data' => $request->all()], 200);
+    }
+
+    public function android_cart_details(Request $request){
+
+        $products_in_cart = ExtensionCart::Where('user_id', Auth::user()->id)->get();
+
+
+        return response()->json(["data" => $products_in_cart], 200);
+
+    }
 
 }

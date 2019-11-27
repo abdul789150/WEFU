@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="col-lg-10 float-right">
+    <div class="col-lg-8 custom-radius-dashboard bg-white h-98 mt-1 float-right text-dark">
         <div class="container">
             <div class="p-4">
                 <h2><strong>Last Step</strong></h2>
@@ -11,7 +11,7 @@
         </div>
 
 
-        <div class="col-lg-8 float-left shadow custom-radius">
+        <div class="col-lg-12 float-left shadow custom-radius">
             <div class="container pt-4">
                 <h4>Choose a delivery option</h4>
 
@@ -60,13 +60,9 @@
                     </table>
                 </div>
                 
-                <div class="m-5 pl-5 mt-n1">
-                    <div class="ml-5 pl-5">
-                        <div class="ml-3">
-                            <p><strong>Total with Shippment Price</strong></p>
-                            <h2 class="mt-n2" id="price_with_shippment"></h2>
-                        </div>
-                    </div>
+                <div class="text-center">
+                    <p><strong>Total with Shippment Price</strong></p>
+                    <h2 class="mt-n2" id="price_with_shippment"></h2>
                 </div>
 
                 <div class="m-5 border-top">
@@ -90,7 +86,7 @@
                             <input id="address_id" type="text" name="address_id" value="{{$address->id}}" hidden>
                             <input id="pp_id" type="text" name="pp_id" value="" hidden>
 
-                            <div class="ml-5 pl-4 pt-2">
+                            <div class="" style="margin-left: 150px;">
                                 <button class="btn btn-outline-purple p-2 rounded-pill" type="submit" >Confirm Order<i class="fa fa-long-arrow-right pl-1"></i></button>
                             </div>
 
@@ -102,24 +98,25 @@
             </div>
         </div>
 
-        <div class="col-lg-4 float-right">
+        {{-- <div class="col-lg-4 float-right">
             <div class="container shadow bg-white custom-radius">
-                <div class="p-3 pt-4">
-                    <h4 class="">Order Summary</h4>
-                    <table class="table table-borderless table-sm">
-                        <tr>
-                            <th>Total Products</th>
+                <div class="p-3 pt-4"> --}}
+                    {{-- <h4 class="">Order Summary</h4> --}}
+                    {{-- <table class="table table-borderless table-sm"> --}}
+                        {{-- <tr> --}}
+                            {{-- <th>Total Products</th> --}}
                             {{-- @php
+                                Not working
                                 $total_products = $order->shopping_carts->count();
                             @endphp --}}
-                            <td>{{ $total_products }} items</td>
-                        </tr>
-                        <tr>
-                            <th>Subtotal</th>
-                            <td id="subtotal_price"></td>
-                        </tr>
-                    </table>
-                    <hr>
+                            {{-- <td>{{ $total_products }} items</td> --}}
+                        {{-- </tr> --}}
+                        {{-- <tr> --}}
+                            {{-- <th>Subtotal</th> --}}
+                            {{-- <td id="subtotal_price"></td> --}}
+                        {{-- </tr> --}}
+                    {{-- </table> --}}
+                    {{-- <hr>
                     <table class="table table-borderless table-sm">
                         <tr>
                             <th colspan="2">Delivery Address</th>
@@ -138,11 +135,11 @@
                             <th>Zipcode</th>
                             <td>{{ $address->zipcode }}</td>
                         </tr>
-                    </table>
-                </div>
+                    </table> --}}
+                {{-- </div>
 
             </div>
-        </div>
+        </div> --}}
 
     </div>
 
@@ -157,8 +154,9 @@
 <script>
     
     window.onload = function(){
-        
-        document.getElementById("subtotal_price").innerHTML = "<b>PKR</b> " + numberWithCommas({{$total_price}});
+        $( "#dashboard-options li" ).removeClass( "dashboard-li-selected" );
+        $( "#cart" ).addClass( "dashboard-li-selected" );
+        // document.getElementById("subtotal_price").innerHTML = "<b>PKR</b> " + numberWithCommas({{$total_price}});
 
         var pricing_array = @json($pricing_plans);
         var value = $("input:radio[name='pricing_selected_option']:checked").val();

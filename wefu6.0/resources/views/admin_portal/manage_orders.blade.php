@@ -33,15 +33,15 @@
 
 
 
-<div class="col-lg-10 float-right pt-4">
+<div class="col-lg-8 custom-radius-dashboard bg-white float-right h-98 mt-1 text-dark">
     <div class="container">
-        <div class="text-center">
-            <h1> <strong>Orders List</strong> </h1>
+        <div class="pl-4 pt-4">
+            <h2> <strong>Orders List</strong> </h2>
         </div>
 
         {{-- Simple four cards --}}
 
-        <div class="container mt-5 d-flex">
+        <div class="container mt-4 d-flex">
             <div class="container col-lg-2 p-2">
                 <div class="text-center p-2">
                     <h1 style="color:purple;">{{$orders->count()}}</h1>
@@ -76,8 +76,6 @@
 
         {{-- ENDING OF CARDS  --}}
 
-
-
         <div class="container mt-5">
 
             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -96,7 +94,7 @@
             </ul>
             <div class="tab-content" id="myTabContent">
                 {{-- All Orders Section --}}
-                <div class="tab-pane fade show active" id="all_orders" role="tabpanel" aria-labelledby="all_orders-tab">
+                <div class="tab-pane fade manage-orders-tab-layout show active" id="all_orders" role="tabpanel" aria-labelledby="all_orders-tab">
 
                     <div class="pt-3">
                         <table class="table table-borderless all-orders-table">
@@ -152,7 +150,7 @@
 {{-- ///////////////////////////////////////////////////// --}}
 
                 {{-- Active Orders Section --}}
-                <div class="tab-pane fade" id="active_orders" role="tabpanel" aria-labelledby="active_orders-tab">
+                <div class="tab-pane fade manage-orders-tab-layout" id="active_orders" role="tabpanel" aria-labelledby="active_orders-tab">
                     <div class="pt-3">
                         <table class="table table-borderless all-orders-table">
                             <thead class="text-muted">
@@ -190,7 +188,7 @@
 {{-- /////////////////////////////////////////////////// --}}
 
                 {{-- unpaid Orders Section --}}
-                <div class="tab-pane fade" id="unpaid_orders" role="tabpanel" aria-labelledby="unpaid_orders-tab">
+                <div class="tab-pane fade manage-orders-tab-layout" id="unpaid_orders" role="tabpanel" aria-labelledby="unpaid_orders-tab">
                     <div class="pt-3">
                         <table class="table table-borderless all-orders-table">
                             <thead class="text-muted">
@@ -228,7 +226,7 @@
 
                 {{-- ///////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ --}}
                 {{-- Unfulfilled Orders Section --}}
-                <div class="tab-pane fade" id="unfulfilled_orders" role="tabpanel" aria-labelledby="unfulfilled_orders-tab">
+                <div class="tab-pane fade manage-orders-tab-layout" id="unfulfilled_orders" role="tabpanel" aria-labelledby="unfulfilled_orders-tab">
                     <div class="pt-3">
                         <table class="table table-borderless all-orders-table">
                             <thead class="text-muted">
@@ -274,6 +272,14 @@
 
 @endsection
 
+<script>
+
+    window.onload = function(){
+        $( "#dashboard-options li" ).removeClass( "dashboard-li-selected" );
+        $( "#manageOrders" ).addClass( "dashboard-li-selected" );
+    }
+
+</script>
 
 
 
@@ -287,14 +293,14 @@
 
 
 
-{{-- 
+
     
     
     
     
     
     
-                            <table class="table table-borderless all-orders-table">
+                            {{-- <table class="table table-borderless all-orders-table">
                             <thead class="text-muted">
                                 <tr>
                                     <th>Order ID</th>
@@ -315,7 +321,7 @@
                                     <td>
                                         <div class="completed-order">
                                             Order Completed
-                                        </div>
+                                        </div> --}}
                                         {{-- <button class="btn btn-success" style="line-height: 10px; font-size: 12px;">complete Now</button> --}}
                                     {{-- </td>
                                 </tr>
@@ -380,4 +386,4 @@
     
     
     
-    --}}
+    

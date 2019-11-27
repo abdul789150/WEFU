@@ -10,9 +10,9 @@
     @endphp
 
 
-    <div class="container col-md-10 float-right" id="">
+    <div class="container col-lg-8 bg-white custom-radius-dashboard h-98 mt-1 float-right text-dark" id="">
 
-        <div class="p-5">
+        <div class="p-4">
             <h4><strong>Select Shippment Address</strong></h4>
             <p>
                 You can use the existing address, or you can also create a new address.<br>
@@ -26,28 +26,31 @@
                 
             {{-- If Condition If a user has added an address --}}
             <div class="card-deck">
-                <div class="card col-md-4 dashed-card-border">
-                    <div class="card-body">
-                        <div class="p-5 m-2 mr-n2">
-
-                            @php
-                                $username = $user[0]->username;
-                            @endphp
-
-                            <a href="#newaddress" data-toggle="modal" data-target=".address_model">
-                                <div class="pl-5 ml-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="36px" height="36px" viewBox="0 0 357 357" style="enable-background:new 0 0 357 357;" xml:space="preserve"><g><g>
-                                        <g id="add">
-                                            <path d="M357,204H204v153h-51V204H0v-51h153V0h51v153h153V204z" data-original="#000000" class="active-path" data-old_color="#000000" fill="#BBBBBB"/>
-                                        </g>
-                                        </g></g> 
-                                    </svg>
-                                </div>
-                                <h4 class="a-address pl-2 pt-2"><strong>New Address</strong></h4>
-                            </a>
+                <div class="col-lg-6">
+                    <div class="card dashed-card-border">
+                        <div class="card-body">
+                            <div class="p-4 m-4">
+    
+                                @php
+                                    $username = $user[0]->username;
+                                @endphp
+    
+                                <a href="#newaddress" data-toggle="modal" data-target=".address_model">
+                                    <div class="pl-5 ml-5">
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="36px" height="36px" viewBox="0 0 357 357" style="enable-background:new 0 0 357 357;" xml:space="preserve"><g><g>
+                                            <g id="add">
+                                                <path d="M357,204H204v153h-51V204H0v-51h153V0h51v153h153V204z" data-original="#000000" class="active-path" data-old_color="#000000" fill="#BBBBBB"/>
+                                            </g>
+                                            </g></g> 
+                                        </svg>
+                                    </div>
+                                    <h4 class="a-address pl-5 pt-4"><strong style="">New Address</strong></h4>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>  
+                </div>
+  
 
                 @php
                     $j = 0;                
@@ -62,37 +65,38 @@
                     @if($i == 1)        
                         <div class="card-deck mt-4">
                     @endif
-
-                    <div class="card col-md-4">
-                        <div class="card-body">
-                            <h5 class="card-title"><strong>{{$user[0]->full_name}}</strong></h5>
-                            <p class="card-text">
-                                {{$address->delivery_address}}
-                                <br/>
-                                {{$address->city}}, {{$address->province}}, {{$address->zipcode}}  
-                                <br/>
-                                Pakistan
-                                <br/>
-                                <strong>Phone Number: </strong> {{@$user[0]->phone_no}}
-                            </p>
-                        </div>
-
-                        <form role="form" method="POST" action="{{route('selectedAddress')}}">
-                            @csrf
-                            <div class="p-2">
-                                <input type="text" name="selected_address" value="{{$address->id}}" hidden>
-                                {{-- <input type="text" name="order_id" value="{{$order[0]->id}}" hidden> --}}
-                                <button class="btn btn-primary" type="submit">Deliver to this Address</button>
+                    
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"><strong>{{$user[0]->full_name}}</strong></h5>
+                                <p class="card-text">
+                                    {{$address->delivery_address}}
+                                    <br/>
+                                    {{$address->city}}, {{$address->province}}, {{$address->zipcode}}  
+                                    <br/>
+                                    Pakistan
+                                    <br/>
+                                    <strong>Phone Number: </strong> {{@$user[0]->phone_no}}
+                                </p>
                             </div>
-                        </form>
-
-                        <div class="card-footer bg-white">
-                            <a href="#" class="card-link">Update</a>
-                            <a href="#" class="card-link">Delete</a>
+    
+                            <div class="card-footer bg-white">
+                                <a href="#" class="card-link float-left pt-2">Update</a>
+                                <form role="form" method="POST" action="{{route('selectedAddress')}}">
+                                    @csrf
+                                    <div class="float-right">
+                                        <input type="text" name="selected_address" value="{{$address->id}}" hidden>
+                                        {{-- <input type="text" name="order_id" value="{{$order[0]->id}}" hidden> --}}
+                                        <button class="btn btn-purple" type="submit">Deliver to this Address</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
 
-                    @if($i == 3)
+
+                    @if($i == 2)
                         </div>
                         @php
                             $j = 1;    
@@ -119,7 +123,7 @@
 
 
     {{-- MODEL BOX --}}
-    <div class="modal fade address_model" tabindex="-1" role="dialog" aria-labelledby="address_model" aria-hidden="true">
+    <div class="modal fade address_model text-dark" tabindex="-1" role="dialog" aria-labelledby="address_model" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
             
@@ -296,6 +300,8 @@
     <script>
         window.onload = function(){
             var phone = document.getElementById("phone_no").setAttribute('disabled', 'disabled');
+            $( "#dashboard-options li" ).removeClass( "dashboard-li-selected" );
+            $( "#cart" ).addClass( "dashboard-li-selected" );
         } 
 
     </script>
@@ -303,10 +309,12 @@
     <script>
         window.onload = function(){
             var phone = document.getElementById("phone_no").setAttribute('placeholder', "Please add a phone number");
+            $( "#dashboard-options li" ).removeClass( "dashboard-li-selected" );
+            $( "#cart" ).addClass( "dashboard-li-selected" );
         } 
     </script>
 @endif 
 
 <script>
-    // main()
+
 </script>

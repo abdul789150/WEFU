@@ -17,4 +17,8 @@ class ManagementController extends Controller
             "pricing_plans" => $pricing_plans,
         ]);
     }
+
+    public function save_pricing_plan(Request $request){
+        dd($request->all());
+    }
 }
