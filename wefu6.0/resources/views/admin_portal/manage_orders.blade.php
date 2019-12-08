@@ -2,388 +2,151 @@
 
 @section('content')
 
-@php
-    $active = 0;
-    $unfulfilled = 0;
-    $unpaid = 0;
-    $completed_orders = 0;
-@endphp
+    <div class="col-lg-8 custom-radius-dashboard bg-white float-right h-98 mt-1 text-dark">
 
-@foreach ($orders as $order)
-    @if ($order->payment_completed == false)
-        @php
-            $unpaid = $unpaid + 1;
-        @endphp
-
-    @elseif($order->is_fulfilled == false)
-        @php
-            $unfulfilled = $unfulfilled + 1;
-        @endphp
-
-    @elseif($order->is_delivered == false)
-        @php
-            $active = $active + 1;
-        @endphp
-    @else
-        @php
-            $completed_orders = $completed_orders + 1;    
-        @endphp
-    @endif
-@endforeach
-
-
-
-<div class="col-lg-8 custom-radius-dashboard bg-white float-right h-98 mt-1 text-dark">
-    <div class="container">
-        <div class="pl-4 pt-4">
-            <h2> <strong>Orders List</strong> </h2>
+        <div class="pt-4 pl-4">
+            <h2>Manage Orders</h2>
         </div>
 
-        {{-- Simple four cards --}}
+        <div class="container mt-2">
+            {{-- {{$products_cluster_array}} --}}
+            <table class="table table-borderless all-orders-table">
+                <thead class="text-muted">
+                    <tr class="text-center">
+                        <th>S.No</th>
+                        <th colspan="2">Product</th>
+                        <th>Quantity</th>
+                        <th colspan="2">Completed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php
+                        $i = 1;
+                    @endphp
+                    @foreach ($products_cluster_array as $item)
+                        <tr class="manage-orders-row">
+                            <th class="text-muted">{{$i}}</th>
+                            <td>
+                                <div class="top-pick-img-div">
+                                    <img src="{{$item->product->product_img_link}}" alt="{{$item->product->product_name}}">
+                                </div>
+                            </td>   
+                            <th class="text-muted">
+                                <div class="d-inline-block text-truncate ml-n4" style="max-width: 300px;">
+                                    {{$item->product->product_name}}
+                                </div>
+                            </th>
+                            <td>
+                                {{$item->quantity}}
+                            </td>
+                            <td>
+                                <a href="#" class="btn btn-purple">Buy Now</a>
+                            </td>
+                            <td>
+                                <label class="pure-material-checkbox">
+                                    <input type="checkbox" name="checkbox_{{$i-1}}" id="checkboxes" value="{{$i-1}}"/>
+                                </label>
 
-        <div class="container mt-4 d-flex">
-            <div class="container col-lg-2 p-2">
-                <div class="text-center p-2">
-                    <h1 style="color:purple;">{{$orders->count()}}</h1>
-                    <h6 class="text-muted">Total Orders</h6>
-                </div>
-            </div>
-            <div class="container col-lg-2 p-2">
-                <div class="text-center p-2">
-                    <h1 style="color:Green;">{{$completed_orders}}</h1>
-                    <h6 class="text-muted">Completed</h6>
-                </div>
-            </div>
-            <div class="container col-lg-2 p-2">
-                <div class="text-center p-2">
-                    <h1 class="text-primary">{{$active}}</h1>
-                    <h6 class="text-muted">Active Orders</h6>
-                </div>
-            </div>
-            <div class="container col-lg-2 p-2">
-                <div class="text-center p-2">
-                    <h1 style="color:orange;">{{$unfulfilled}}</h1>
-                    <h6 class="text-muted">Unfulfilled</h6>
-                </div>
-            </div>
-            <div class="container col-lg-2 p-2">
-                <div class="text-center p-2">
-                    <h1 style="color:red;">{{$unpaid}}</h1>
-                    <h6 class="text-muted">Unpaid Orders</h6>
+                                @php
+                                    $j = 0;
+                                @endphp
+                                <form id="form_{{$i-1}}" class="product_listing_form">
+                                    @foreach ($item->product_id_list as $id_list)
+                                        <input type="text" name="id_list[$j]" class="for_{{$i-1}}" value="{{$id_list}}" hidden>
+                                        @php
+                                            $j++;
+                                        @endphp
+                                    @endforeach
+                                </form>
+                            </td>
+                        </tr>
+                        @php
+                            $i++;
+                        @endphp
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#amazon_order_confirmation">
+            Launch static backdrop modal
+        </button>
+        <!-- Modal -->
+        <div class="modal fade" id="amazon_order_confirmation" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="amazon_order_confirmationLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="amazon_order_confirmationLabel">Order Confirmation</h5>
+                        <button type="button" class="close cancel-btn" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text-center">
+                            <h3> <strong>Provide Details</strong></h3>
+                            <p>
+                                Please provide order number given by amazon.
+                            </p>
+                            <form id="form_{{$i-1}}" class="product_listing_forssm" method="POST" action="{{route('clusterConfrimation')}}">
+                                <div class="col-lg-8 m-auto">
+                               
+                                    @csrf
+                                    @php
+                                        $j = 0;
+                                    @endphp
+                                    @foreach ($products_cluster_array[0]->product_id_list as $id_list)
+                                        <input type="text" name="id_list[{{$j}}]" class="for_{{$i-1}}" value="{{$id_list}}" hidden>
+                                        @php
+                                            $j++;
+                                        @endphp
+                                    @endforeach
+                                        {{-- <button type="submit">Subit Now</button> --}}
+                                    
+                                    <input type="text" class="form-control" name="amazon_order_number" placeholder="Enter Order Number" value="">
+                                </div>
+                                <div class="mt-5">
+                                    <button type="button" class="btn btn-secondary cancel-btn" data-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-primary">Confirm Order</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        {{-- ENDING OF CARDS  --}}
 
-        <div class="container mt-5">
-
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item nav-item-order">
-                    <a class="nav-link nav-link-order active" id="all_orders-tab" data-toggle="tab" href="#all_orders" role="tab" aria-controls="all_orders" aria-selected="true">All orders</a>
-                </li>
-                <li class="nav-item nav-item-order">
-                    <a class="nav-link nav-link-order" id="active_orders-tab" data-toggle="tab" href="#active_orders" role="tab" aria-controls="active_orders" aria-selected="false">Active</a>
-                </li>
-                <li class="nav-item nav-item-order">
-                    <a class="nav-link nav-link-order" id="unpaid_orders-tab" data-toggle="tab" href="#unpaid_orders" role="tab" aria-controls="unpaid_orders" aria-selected="false">Unpaid</a>
-                </li>
-                <li class="nav-item nav-item-order">
-                    <a class="nav-link nav-link-order" id="unfulfilled_orders-tab" data-toggle="tab" href="#unfulfilled_orders" role="tab" aria-controls="unfulfilled_orders" aria-selected="false">Unfulfilled</a>
-                </li>
-            </ul>
-            <div class="tab-content" id="myTabContent">
-                {{-- All Orders Section --}}
-                <div class="tab-pane fade manage-orders-tab-layout show active" id="all_orders" role="tabpanel" aria-labelledby="all_orders-tab">
-
-                    <div class="pt-3">
-                        <table class="table table-borderless all-orders-table">
-                            <thead class="text-muted">
-                                <tr>
-                                    <th>Order ID</th>
-                                    <th>Created</th>
-                                    <th>Customer</th>
-                                    <th>Total Price</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                @foreach ($orders as $order)
-                                    
-                                    <tr class="orders-row">
-                                        <td class="text-primary">{{$order->id}}</td>
-                                        <td>Aug 12, 2019</td>
-                                        <td>{{$order->user->full_name}}</td>
-                                        <td> <b>PKR</b> {{$order->total_price}}</td>
-                                        <td>
-
-                                            @if ($order->payment_completed == false)
-                                                <div class="unpaid-order">
-                                                    Unpaid
-                                                </div>
-                                            
-                                            @elseif ($order->is_fulfilled == false)
-                                                
-                                                <div class="unfulfill-order">
-                                                    Unfulfilled
-                                                </div>
-
-                                            @elseif ($order->is_delivered == false)
-                                                <div class="pen-ship-order">
-                                                    Shippment Due
-                                                </div>
-                                            @else
-                                                <div class="completed-order">
-                                                    Order Completed
-                                                </div>
-                                            @endif
-                                        </td>
-                                    </tr>
-
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
-{{-- ///////////////////////////////////////////////////// --}}
-
-                {{-- Active Orders Section --}}
-                <div class="tab-pane fade manage-orders-tab-layout" id="active_orders" role="tabpanel" aria-labelledby="active_orders-tab">
-                    <div class="pt-3">
-                        <table class="table table-borderless all-orders-table">
-                            <thead class="text-muted">
-                                <tr>
-                                    <th>Order ID</th>
-                                    <th>Created</th>
-                                    <th>Customer</th>
-                                    <th>Total Price</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                @foreach ($orders as $order)
-                                    
-                                    @if ($order->payment_completed == true && $order->is_fulfilled == true && $order->is_delivered == false)
-                                      <tr class="orders-row">
-                                            <td class="text-primary">{{$order->id}}</td>
-                                            <td>Aug 12, 2019</td>
-                                            <td>{{$order->user->full_name}}</td>
-                                            <td> <b>PKR</b> {{$order->total_price}}</td>
-                                            <td>
-                                                <div class="pen-ship-order">
-                                                    Shippment Due
-                                                </div>
-                                            </td>
-                                        </tr>                                        
-                                    @endif
-
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-{{-- /////////////////////////////////////////////////// --}}
-
-                {{-- unpaid Orders Section --}}
-                <div class="tab-pane fade manage-orders-tab-layout" id="unpaid_orders" role="tabpanel" aria-labelledby="unpaid_orders-tab">
-                    <div class="pt-3">
-                        <table class="table table-borderless all-orders-table">
-                            <thead class="text-muted">
-                                <tr>
-                                    <th>Order ID</th>
-                                    <th>Created</th>
-                                    <th>Customer</th>
-                                    <th>Total Price</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                @foreach ($orders as $order)
-                                    
-                                    @if ($order->payment_completed == false)
-                                        <tr class="orders-row">
-                                            <td class="text-primary">{{$order->id}}</td>
-                                            <td>Aug 12, 2019</td>
-                                            <td>{{$order->user->full_name}}</td>
-                                            <td> <b>PKR</b> {{$order->total_price}}</td>
-                                            <td>
-                                                <div class="unpaid-order">
-                                                    Unpaid
-                                                </div>
-                                            </td>
-                                        </tr>                                        
-                                    @endif
-
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                {{-- ///////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ --}}
-                {{-- Unfulfilled Orders Section --}}
-                <div class="tab-pane fade manage-orders-tab-layout" id="unfulfilled_orders" role="tabpanel" aria-labelledby="unfulfilled_orders-tab">
-                    <div class="pt-3">
-                        <table class="table table-borderless all-orders-table">
-                            <thead class="text-muted">
-                                <tr>
-                                    <th>Order ID</th>
-                                    <th>Created</th>
-                                    <th>Customer</th>
-                                    <th>Total Price</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                @foreach ($orders as $order)
-                                    
-                                    @if ($order->payment_completed == true && $order->is_fulfilled == false)
-                                        <tr class="orders-row">
-                                            <td class="text-primary">{{$order->id}}</td>
-                                            <td>Aug 12, 2019</td>
-                                            <td>{{$order->user->full_name}}</td>
-                                            <td> <b>PKR</b> {{$order->total_price}}</td>
-                                            <td>
-                                                <div class="unfulfill-order">
-                                                    Unfulfilled
-                                                </div>
-                                            </td>
-                                        </tr>                                        
-                                    @endif
-
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
-
-        {{-- End of cards --}}
     </div>
-</div>
 
 @endsection
 
 <script>
-
     window.onload = function(){
         $( "#dashboard-options li" ).removeClass( "dashboard-li-selected" );
         $( "#manageOrders" ).addClass( "dashboard-li-selected" );
+
+        $(".product_listing_form").each(function(){
+            $(this).submit(function(){
+                return false;
+            })
+        });
+
+        $("input[type='checkbox']").click(function(){
+            console.log("check box clicked");
+            var checkedVal = $("input[type='checkbox']:checked").val();
+            // console.log(checkedVal);
+            if(checkedVal != undefined){
+                $(".for_"+checkedVal).each(function(){
+                    // console.log("inside loop")
+                    console.log($(this).val());
+                });
+                // $("#amazon_order_confirmation").modal("show");
+            }
+
+        });
+        $(".cancel-btn").click(function(){
+            $("input[type='checkbox']:checked").prop("checked", false);
+        });
+
     }
-
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    
-    
-    
-    
-    
-                            {{-- <table class="table table-borderless all-orders-table">
-                            <thead class="text-muted">
-                                <tr>
-                                    <th>Order ID</th>
-                                    <th>Created</th>
-                                    <th>Customer</th>
-                                    <th>Items</th>
-                                    <th>Total</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="orders-row">
-                                    <td class="text-primary">1</td>
-                                    <td>Aug 12, 2019</td>
-                                    <td>AbdulRehman</td>
-                                    <td>20x</td>
-                                    <td><b>PKR</b> 1000,000</td>
-                                    <td>
-                                        <div class="completed-order">
-                                            Order Completed
-                                        </div> --}}
-                                        {{-- <button class="btn btn-success" style="line-height: 10px; font-size: 12px;">complete Now</button> --}}
-                                    {{-- </td>
-                                </tr>
-                                <tr class="orders-row">
-                                    <td class="text-primary">1</td>
-                                    <td>Aug 12, 2019</td>
-                                    <td>AbdulRehman</td>
-                                    <td>20x</td>
-                                    <td><b>PKR</b> 1000,000</td>
-                                    <td>
-                                        <div class="unpaid-order">
-                                            Unpaid
-                                        </div>
-                                        {{-- <button class="btn btn-outline-danger" style="line-height: 10px; font-size: 12px;">Unpaid</button> --}}
-                                    {{-- </td>
-                                </tr>
-                                <tr class="orders-row">
-                                    <td class="text-primary">1</td>
-                                    <td>Aug 12, 2019</td>
-                                    <td>AbdulRehman</td>
-                                    <td>20x</td>
-                                    <td><b>PKR</b> 1000,000</td>
-                                    <td>
-                                        <div class="pen-ship-order">
-                                            Shippment Due
-                                        </div> --}}
-                                        {{-- <button class="btn btn-warning" style="line-height: 10px; font-size: 12px;">Pending Shippment</button> --}}
-                                    {{-- </td>
-                                </tr>
-                                <tr class="orders-row">
-                                    <td class="text-primary">1</td>
-                                    <td>Aug 12, 2019</td>
-                                    <td>AbdulRehman</td>
-                                    <td>20x</td>
-                                    <td> <b>PKR</b> 1000,000</td>
-                                    <td>
-                                        <div class="unfulfill-order">
-                                            Unfulfilled --}}
-                                        {{-- </div> --}}
-                                        {{-- <button class="btn btn-warning" style="line-height: 10px; font-size: 12px;">Pending Shippment</button> --}}
-                                    {{-- </td> --}}
-                                {{-- </tr>
-                            </tbody>
-                        </table> --}}
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    

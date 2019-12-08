@@ -83,7 +83,6 @@ class CartController extends Controller
 
         $products_in_cart = ExtensionCart::Where('user_id', Auth::user()->id)->get();
 
-
         return response()->json(["data" => $products_in_cart], 200);
 
     }

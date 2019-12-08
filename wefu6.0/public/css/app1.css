@@ -26,7 +26,7 @@
 }
 
 .h-98{
-    height: 99%;
+    height: 99% !important;
 }
 
 .dashboard-anchor{
@@ -687,6 +687,16 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     /* margin-top: 10px; */
 }
 
+.manage-orders-row{
+    /* background-color: silver; */
+    border-radius: 0.50rem;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    /* margin-top: 10px; */
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+}
+
 .completed-order{
     padding: 4px;
     width: 200px;
@@ -955,3 +965,72 @@ input:focus{
    display: none; 
    background-color: #F5F5F5;
 }
+
+
+
+
+/* ///////////////////////////////////////////////////////////
+//
+//
+//
+//
+//       STRIPE PAYMENT FORM CSS
+//
+//
+//
+//
+///////////////////////////////////////////////////////////*/
+
+
+/**
+ * The CSS shown here will not be introduced in the Quickstart guide, but shows
+ * how you can use CSS to style your Element's container.
+ */
+ .StripeElement {
+    box-sizing: border-box;
+  
+    height: 40px;
+  
+    padding: 10px 12px;
+  
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: white;
+  
+    box-shadow: 0 1px 3px 0 #e6ebf1;
+    -webkit-transition: box-shadow 150ms ease;
+    transition: box-shadow 150ms ease;
+  }
+  
+  .StripeElement--focus {
+    box-shadow: 0 1px 3px 0 #cfd7df;
+  }
+  
+  .StripeElement--invalid {
+    border-color: #fa755a;
+  }
+  
+  .StripeElement--webkit-autofill {
+    background-color: #fefde5 !important;
+  }
+
+
+
+
+
+
+/* ///////////////////////////////////////////////////////////////
+//
+//
+//
+//
+//
+//
+//              ENDING OF STRIPE PAYMENT FORM CSS
+//
+//
+//
+//
+////////////////////////////////////////////////////////////////////*/
+
+/* Custom checkbox */

@@ -9,11 +9,11 @@ class Cart extends Model
     protected $table = "shopping_cart";
     // 
     function order(){
-        $this->belongsTo(Orders::class);
+        return $this->belongsTo(Orders::class);
     }
 
     function product(){
-        $this->belongsTo(Products::class);
+        return $this->belongsTo(Products::class);
     }
 
 }

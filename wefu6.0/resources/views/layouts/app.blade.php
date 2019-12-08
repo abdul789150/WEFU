@@ -191,7 +191,7 @@
                     <li class="dashboard-li" id="payments"> <a class="dashboard-anchor ml-3" href="#">My Payments</a></li>
                     <li class="dashboard-li" id="shippments"> <a class="dashboard-anchor ml-3" href="#">My Shippments</a></li>
                     <li class="dashboard-li" id="pricing_plans"> <a class="dashboard-anchor ml-3" href="#">Pricing Plans</a></li>
-
+                    <li class="dashboard-li" id="pricing_plans"> <a class="dashboard-anchor ml-3" href="{{route('paymentMethods')}}">Pay Now</a></li>
                 </ul>
             </div>
             @endhasrole
@@ -200,6 +200,7 @@
                 <ul id="dashboard-options" class="list-unstyled">
                     <li class="dashboard-li" id="home"> <a class="dashboard-anchor ml-3" href="{{ route('home') }}">Home</a></li>
                     <li class="dashboard-li" id="profile"> <a class="dashboard-anchor ml-3" href="{{ route('profile', $username) }}">My Profile</a></li>
+                    <li class="dashboard-li" id="ordersList"> <a class="dashboard-anchor ml-3" href="{{ route('ordersList') }}">Orders List</a></li>
                     <li class="dashboard-li" id="manageOrders"> <a class="dashboard-anchor ml-3" href="{{ route('manageOrders') }}">Manage Orders</a></li>
                     <li class="dashboard-li" id="manageShippments"> <a class="dashboard-anchor ml-3" href="#">Manage Shippments</a></li>
                     <li class="dashboard-li" id="UpdatePricingPlan"> <a class="dashboard-anchor ml-3" href="{{route('updatePricingPlan')}}">Update Pricing Plans</a></li>
@@ -276,6 +277,7 @@
 @endif
 <!-- Scripts -->
 <script src="{{ asset('js/bootstrap.js') }}"></script>
+<script src="https://js.stripe.com/v3/"></script>
 <script>
 
     var logout_div = document.getElementById("logout-div")
@@ -324,5 +326,7 @@
     }
 
 </script>
+
+@stack('ScriptStack')
 </body>
 </html>

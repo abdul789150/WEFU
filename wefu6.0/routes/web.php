@@ -40,7 +40,8 @@ Route::group(['prefix' => 'customer', 'middleware' => 'role:customer'],function(
     Route::get('/shippingOption/{address_id}','order_controller@shipping_option')->name('shippingOption');
     Route::get('/orderConfirmation/{address_id}/{pp_id}', 'order_controller@order_confirmation')->name('orderConfirmation');
     Route::get('/orders/completedOrders', 'order_controller@completed_orders')->name('completedOrders');
-    Route::get('/orders/incompleteOrders', 'order_controller@incomplete_orders')->name('incompleteOrders');    
+    Route::get('/orders/incompleteOrders', 'order_controller@incomplete_orders')->name('incompleteOrders'); 
+    Route::get('/paymentMethods','PaymentController@payment_index')->name('paymentMethods');   
 ///////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\//////////\\\\\
     Route::post('/profile/addAddress/{username}', 'profile_controller@add_address')->name('insertAddress');
     Route::post('/checkout','cart_controller@checkout')->name('checkout');
@@ -61,11 +62,12 @@ Route::group(['prefix' => 'customer', 'middleware' => 'role:customer'],function(
 ///////////////////////////////////////////////////////////////////////////////
 
 Route::group(['prefix' => 'admin', 'middleware' => 'role:admin'],function(){
+    Route::get('/ordersList','Admin\OrderController@orders_list')->name('ordersList');
     Route::get('/manageOrders','Admin\OrderController@manage_orders')->name('manageOrders');
     Route::get('/updatePricingPlan', 'Admin\ManagementController@update_pricing_plan')->name('updatePricingPlan');
     Route::get('/createUser', 'Admin\ManagementController@create_user')->name('createUser');
 
     ///////////////////////////////////////////////////////////////////////////////////////
     Route::post("/savePricingPlan","Admin\ManagementController@save_pricing_plan")->name('savePricingPlan');
-
+    Route::post('/orderClusterConfrimation', 'Admin\OrderController@cluster_confirmation')->name('clusterConfrimation');
 });
