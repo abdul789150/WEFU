@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\AmazonShipment;
 use App\Cart;
 use App\Http\Controllers\Controller;
 use App\Orders;
 use App\Products;
+use App\Route;
+use App\Shippment;
+use App\ShippmentDestination;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
@@ -34,10 +39,13 @@ class OrderController extends Controller
         foreach ($paid_orders as $order) {
             $carts = $order->shopping_carts;
             foreach($carts as $item){
-                $product_object = new class{};
-                $product_object->quantity = $item->quantity;
-                $product_object->product = $item->product;
-                array_push($product_array, $product_object);
+                // change here amazon_shippment_id
+                if($item->amazon_shipment_id == null){
+                    $product_object = new class{};
+                    $product_object->quantity = $item->quantity;
+                    $product_object->product = $item->product;
+                    array_push($product_array, $product_object);
+                }
             }
         }
         // Checkpoint sucessfull
@@ -108,16 +116,32 @@ class OrderController extends Controller
     }
 
     public function cluster_confirmation(Request $request){
+
+        $validator =  Validator::make($request->all(), [
+            'amazon_order_number' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return response()->json(['error' => 'Order id is required'], 401);
+        }
+
         // dd($request->all());
         $data = $request->all();
+        $amazon_shippment = new AmazonShipment();
+        $amazon_shippment->is_confirmed = true;
+        $amazon_shippment->amazon_order_no = $data["amazon_order_number"];
+        $amazon_shippment->save();
+        
         $product_list = Cart::WhereIn('product_id', $data["id_list"])->get();
         // dd($product_list);
         $order_id_list = [];
         foreach ($product_list as $item) {
-            $item->is_confirmed = true;
-            $item->amazon_order_no = $data["amazon_order_number"];
+            // change here amazon_shippment_id
+            // $item->is_confirmed = true;
+            // $item->amazon_order_no = $data["amazon_order_number"];
+            $item->amazon_shipment_id = $amazon_shippment->id;
             array_push($order_id_list, $item->order_id);
-            //     $item->save();
+            $item->save();
         }
 
         // $order_lists = Cart::WhereIn('product_id', $data["id_list"])->get('order_id');
@@ -128,7 +152,8 @@ class OrderController extends Controller
             // dd($shopping_cart);
             $flag = true;
             foreach ($shopping_cart as $cart) {
-                if($cart->is_confirmed == false){
+                // change here amazon_shippment_id
+                if($cart->amazon_shipment_id == null){
                     $flag = false;
                     break;
                 }
@@ -136,9 +161,18 @@ class OrderController extends Controller
             if($flag == true){
                 // dd("create new Shippment");
                 $item->is_fulfilled = true;
-                
+                // Saving in shippment data
+                $shippment = new Shippment();
+                $shippment->order_id = $item->id;
+                $shippment->save();
+                // Saving in Shippment Destination data
+                $shippment_dest = new ShippmentDestination();
+                $shippment_dest->shippment_id = $shippment->id;
+                $route = Route::where('id', 1)->first();
+                $shippment_dest->route_id = $route->id;
+                $shippment_dest->save();
             }
-
+            $item->save();
         }
     }
 

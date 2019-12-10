@@ -202,7 +202,7 @@
                     <li class="dashboard-li" id="profile"> <a class="dashboard-anchor ml-3" href="{{ route('profile', $username) }}">My Profile</a></li>
                     <li class="dashboard-li" id="ordersList"> <a class="dashboard-anchor ml-3" href="{{ route('ordersList') }}">Orders List</a></li>
                     <li class="dashboard-li" id="manageOrders"> <a class="dashboard-anchor ml-3" href="{{ route('manageOrders') }}">Manage Orders</a></li>
-                    <li class="dashboard-li" id="manageShippments"> <a class="dashboard-anchor ml-3" href="#">Manage Shippments</a></li>
+                    <li class="dashboard-li" id="manageShippments"> <a class="dashboard-anchor ml-3" href="{{ route('manageShippments') }}">Manage Shippments</a></li>
                     <li class="dashboard-li" id="UpdatePricingPlan"> <a class="dashboard-anchor ml-3" href="{{route('updatePricingPlan')}}">Update Pricing Plans</a></li>
                     <li class="dashboard-li" id="updateCustomTax"> <a class="dashboard-anchor ml-3" href="#">Update Custom Tax</a></li>
                     <li class="dashboard-li" id="createUser"> <a class="dashboard-anchor ml-3" href="#">Create User</a></li>

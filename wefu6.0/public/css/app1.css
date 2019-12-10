@@ -697,6 +697,16 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     text-align: center;
 }
 
+.shipment-orders-row{
+    /* background-color: silver; */
+    border-radius: 0.50rem;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    /* margin-top: 10px; */
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+}
+
 .completed-order{
     padding: 4px;
     width: 200px;
@@ -966,7 +976,15 @@ input:focus{
    background-color: #F5F5F5;
 }
 
+.manage-shippments-tab-layout{
+    height: 70%;
+    overflow: scroll;
+}
 
+.manage-shippments-tab-layout::-webkit-scrollbar{
+    display: none;
+    background-color: #F5F5F5;
+}
 
 
 /* ///////////////////////////////////////////////////////////

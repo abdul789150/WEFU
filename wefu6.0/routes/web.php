@@ -66,6 +66,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'role:admin'],function(){
     Route::get('/manageOrders','Admin\OrderController@manage_orders')->name('manageOrders');
     Route::get('/updatePricingPlan', 'Admin\ManagementController@update_pricing_plan')->name('updatePricingPlan');
     Route::get('/createUser', 'Admin\ManagementController@create_user')->name('createUser');
+    Route::get('/manageShippments','Admin\ShippmentController@manage_shippments')->name('manageShippments');
 
     ///////////////////////////////////////////////////////////////////////////////////////
     Route::post("/savePricingPlan","Admin\ManagementController@save_pricing_plan")->name('savePricingPlan');

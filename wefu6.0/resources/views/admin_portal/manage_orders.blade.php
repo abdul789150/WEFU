@@ -24,7 +24,7 @@
                         $i = 1;
                     @endphp
                     @foreach ($products_cluster_array as $item)
-                        <tr class="manage-orders-row">
+                        <tr class="manage-orders-row" id="table_row_{{$i-1}}">
                             <th class="text-muted">{{$i}}</th>
                             <td>
                                 <div class="top-pick-img-div">
@@ -46,13 +46,13 @@
                                 <label class="pure-material-checkbox">
                                     <input type="checkbox" name="checkbox_{{$i-1}}" id="checkboxes" value="{{$i-1}}"/>
                                 </label>
-
                                 @php
                                     $j = 0;
                                 @endphp
                                 <form id="form_{{$i-1}}" class="product_listing_form">
+                                    @csrf
                                     @foreach ($item->product_id_list as $id_list)
-                                        <input type="text" name="id_list[$j]" class="for_{{$i-1}}" value="{{$id_list}}" hidden>
+                                        <input type="text" name="id_list[{{$j}}]" class="for_{{$i-1}}" value="{{$id_list}}" hidden>
                                         @php
                                             $j++;
                                         @endphp
@@ -68,9 +68,9 @@
             </table>
         </div>
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#amazon_order_confirmation">
+        {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#amazon_order_confirmation">
             Launch static backdrop modal
-        </button>
+        </button> --}}
         <!-- Modal -->
         <div class="modal fade" id="amazon_order_confirmation" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="amazon_order_confirmationLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -87,28 +87,29 @@
                             <p>
                                 Please provide order number given by amazon.
                             </p>
-                            <form id="form_{{$i-1}}" class="product_listing_forssm" method="POST" action="{{route('clusterConfrimation')}}">
-                                <div class="col-lg-8 m-auto">
-                               
-                                    @csrf
+                            {{-- <form id="form_{{$i-1}}" class="product_listing_forssm" method="POST" action="{{route('clusterConfrimation')}}"> --}}
+                            <div class="col-lg-8 m-auto">
+                            
+                                {{-- @csrf
+                                @php
+                                    $j = 0;
+                                @endphp
+                                @foreach ($products_cluster_array[0]->product_id_list as $id_list)
+                                    <input type="text" name="id_list[{{$j}}]" class="for_{{$i-1}}" value="{{$id_list}}" hidden>
                                     @php
-                                        $j = 0;
+                                        $j++;
                                     @endphp
-                                    @foreach ($products_cluster_array[0]->product_id_list as $id_list)
-                                        <input type="text" name="id_list[{{$j}}]" class="for_{{$i-1}}" value="{{$id_list}}" hidden>
-                                        @php
-                                            $j++;
-                                        @endphp
-                                    @endforeach
-                                        {{-- <button type="submit">Subit Now</button> --}}
-                                    
-                                    <input type="text" class="form-control" name="amazon_order_number" placeholder="Enter Order Number" value="">
-                                </div>
-                                <div class="mt-5">
-                                    <button type="button" class="btn btn-secondary cancel-btn" data-dismiss="modal">Cancel</button>
-                                    <button type="submit" class="btn btn-primary">Confirm Order</button>
-                                </div>
-                            </form>
+                                @endforeach --}}
+                                    {{-- <button type="submit">Subit Now</button> --}}
+                                <form id=""></form>
+                                <input type="text" id="amazon_order_number" class="form-control" name="amazon_order_number" placeholder="Enter Order Number" value="">
+                                <small class="text-danger" id="warning"></small>
+                            </div>
+                            <div class="mt-5">
+                                <button type="button" class="btn btn-secondary cancel-btn" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary" id="confirm_order_btn">Confirm Order</button>
+                            </div>
+                            {{-- </form> --}}
                         </div>
                     </div>
                 </div>
@@ -140,12 +141,44 @@
                     // console.log("inside loop")
                     console.log($(this).val());
                 });
-                // $("#amazon_order_confirmation").modal("show");
+                $("#amazon_order_confirmation").modal("show");
             }
 
         });
         $(".cancel-btn").click(function(){
             $("input[type='checkbox']:checked").prop("checked", false);
+        });
+
+        $("#confirm_order_btn").click(function(){
+            var checkedVal = $("input[type='checkbox']:checked").val();
+            var form_data = $("#form_"+checkedVal).serializeArray();
+            
+            if($("#amazon_order_number").val()){
+                // console.log($("#amazon_order_number").val());
+                var order_number = $("#amazon_order_number").serializeArray();
+                form_data.push(order_number[0])
+            }
+
+            // console.log();
+            // console.log(form_data);
+            $.ajax({
+                method: "POST",
+                url: "{{route('clusterConfrimation')}}",
+                data: form_data,
+                cache: false,
+                success: function(result){
+                    console.log(result)
+                    $("#amazon_order_confirmation").modal("hide");
+                    // Remove the entry from table.
+                    $("#table_row_"+checkedVal).remove();
+                },
+                error: function(result){
+                    console.log(result)
+                    console.log("Sorry bro try again");
+                    $("#warning").html("Please Provide a valid Order Id Given by Amazon");
+                }
+        
+            });
         });
 
     }

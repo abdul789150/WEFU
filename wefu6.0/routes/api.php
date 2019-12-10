@@ -30,3 +30,4 @@ Route::middleware('auth:api')->post('/completeRegistration', 'API\UserController
 Route::middleware('auth:api')->post('/addresses','API\UserController@get_addresses');
 Route::middleware('auth:api')->post('/androidAddToCart', 'API\CartController@android_add_to_cart');
 Route::middleware('auth:api')->post('/cartDetails', 'API\CartController@android_cart_details');
+Route::middleware('auth:api')->post('/productsCheckout', 'API\OrderController@checkout_save_quantity');

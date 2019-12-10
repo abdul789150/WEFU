@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRouteTable extends Migration
+class CreateAmazonShippmentTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateRouteTable extends Migration
      */
     public function up()
     {
-        Schema::create('route', function (Blueprint $table) {
+        Schema::create('amazon_shippment', function (Blueprint $table) {
             $table->increments('id');
-            $table->string("location_name")->nullable();
-            $table->decimal('location_long', 10, 7)->nullable();
-            $table->decimal('location_lat', 10, 7)->nullable();
+            $table->string('amazon_order_no');
+            $table->boolean('is_confirmed')->default(false);
+            $table->boolean('is_delivered_myUs')->default(false);
+            $table->boolean('is_delivered_warehouse')->default(false);
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateRouteTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('route');
+        Schema::dropIfExists('amazon_shippment');
     }
 }
