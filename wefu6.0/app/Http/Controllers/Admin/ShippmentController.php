@@ -21,4 +21,21 @@ class ShippmentController extends Controller
             "orders_delivery" => $orders_delivery, 
         ]);
     }
+
+    public function amazon_shipment_details($id){
+
+        $amazon_shipment = AmazonShipment::Where('id', $id)->first();
+
+        return view('admin_portal.amazon_shipment_details',[
+            "amazon_shipment" => $amazon_shipment,
+        ]);
+    }
+
+    public function orders_details($id){
+        $order = Orders::where("id", $id)->first();
+
+        return view('admin_portal.order_shipment_detail',[
+            "order" => $order,
+        ]);
+    }
 }

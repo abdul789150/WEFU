@@ -15,6 +15,11 @@
     <link href="{{ asset('css/app1.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+
+    {{-- MAP BOX CDN --}}
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css' rel='stylesheet' />
+    @stack('style')
 </head>
 
 @if(Auth::guest())
@@ -177,8 +182,8 @@
         
         <div class="col-lg-2 flex-column fixed-top">
             
-            <div class="p-4 ml-4">
-                <h2> <strong>W</strong>efu</h2>
+            <div class="p-4 ml-4 d-flex">
+                <h1>W</h1><span class="mt-3">efu</span> 
             </div>
 
             @hasrole("customer")

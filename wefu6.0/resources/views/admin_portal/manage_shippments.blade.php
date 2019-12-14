@@ -65,7 +65,7 @@
                                                 {{$quantity}}
                                             </td>
                                             <td>
-                                                <a href="#" class="btn btn-purple">Details</a>
+                                                <a href="{{route('amazonShipmentDetails', $shipment->id)}}" class="btn btn-purple">Details</a>
                                             </td>
                                         </tr>
                                         @php
@@ -122,7 +122,7 @@
                                                 {{$quantity}}
                                             </td>
                                             <td>
-                                                <a href="#" class="btn btn-purple">Details</a>
+                                                <a href="{{route('amazonShipmentDetails', $shipment->id)}}" class="btn btn-purple">Details</a>
                                             </td>
                                         </tr>
                                         @php
@@ -175,7 +175,7 @@
                                                 {{$order->total_price}}
                                             </td>
                                             <td>
-                                                <a href="#" class="btn btn-purple">Details</a>
+                                                <a href="{{route('ordersDetails', $order->id)}}" class="btn btn-purple">Details</a>
                                             </td>
                                         </tr>
                                         @php
@@ -228,7 +228,7 @@
                                                 {{$order->total_price}}
                                             </td>
                                             <td>
-                                                <a href="#" class="btn btn-purple">Details</a>
+                                                <a href="{{route('ordersDetails', $order->id)}}" class="btn btn-purple">Details</a>
                                             </td>
                                         </tr>
                                         @php

@@ -67,7 +67,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'role:admin'],function(){
     Route::get('/updatePricingPlan', 'Admin\ManagementController@update_pricing_plan')->name('updatePricingPlan');
     Route::get('/createUser', 'Admin\ManagementController@create_user')->name('createUser');
     Route::get('/manageShippments','Admin\ShippmentController@manage_shippments')->name('manageShippments');
-
+    Route::get('/shippmentDetails/{id}','Admin\ShippmentController@amazon_shipment_details')->name('amazonShipmentDetails');
+    Route::get('/orderDetails/{id}','Admin\ShippmentController@orders_details')->name('ordersDetails');
     ///////////////////////////////////////////////////////////////////////////////////////
     Route::post("/savePricingPlan","Admin\ManagementController@save_pricing_plan")->name('savePricingPlan');
     Route::post('/orderClusterConfrimation', 'Admin\OrderController@cluster_confirmation')->name('clusterConfrimation');

@@ -26,7 +26,7 @@
 }
 
 .h-98{
-    height: 99% !important;
+    height: 98% !important;
 }
 
 .dashboard-anchor{
@@ -93,6 +93,9 @@
 .custom-radius-confirm-card{
     border-top-left-radius: 1.5rem;
     border-top-right-radius: 1.5rem;
+}
+.custom-radius-dashboard-mapbox{
+    border-top-left-radius: 1.5rem;
 }
 
 /* FOR SELECTING DELIVEY OPTIONS */
@@ -343,6 +346,7 @@ img{
 .show > .btn-outline-purple.dropdown-toggle {
   color: #fff;
   background-color: #5a328e;
+  /* background-color: #b15740; */
   border-color: #5a328e;
 }
 
@@ -355,6 +359,7 @@ img{
 /* #E55B2B */
 .btn-outline-orange {
     color: #E55B2B;
+    /* color: rgb(204, 94, 67); */
     border-color: #E55B2B;
 }
 
@@ -747,6 +752,16 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     margin: auto;
 }
 
+.in-transit-shipment{
+    padding: 5px;
+    width: 200px;
+    font-size: medium;
+    color: rgb(185, 70, 24);
+    background-color: rgb(247, 235, 222);
+    border-radius: 0.5rem;
+    text-align: center;
+}
+
 .all-orders-table td, th{
     text-align: center;
 }
@@ -977,7 +992,7 @@ input:focus{
 }
 
 .manage-shippments-tab-layout{
-    height: 70%;
+    height: 80%;
     overflow: scroll;
 }
 
@@ -985,7 +1000,52 @@ input:focus{
     display: none;
     background-color: #F5F5F5;
 }
+.map-outer-div{
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 400px;
+    overflow: hidden;
+}
+.map-div{
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 450px;
+    /* margin-right: -1.7%;
+    margin-left: -1.7%; */
+}
+.map-blur-upper-div{
+    position: absolute;
+    margin-top: -3%;
+    left: 0;
+    right: 0;
+    background: white;
+    opacity: 0.3;
 
+}
+.map-blur-lower-div{
+    position: absolute;
+    margin-top: -2%;
+    left: 0;
+    right: 0;
+    background-color: white;
+    opacity: 0.85;
+}
+
+.shippment-destination-detail-card{
+    margin-top: -12%;
+    /* z-index: 1; */
+    left: 0;
+    right: 0;
+}
+
+.shippment-destination-detail-card-1{
+    margin-top: -18.5%;
+    /* z-index: 1; */
+    left: 0;
+    right: 0;
+}
 
 /* ///////////////////////////////////////////////////////////
 //

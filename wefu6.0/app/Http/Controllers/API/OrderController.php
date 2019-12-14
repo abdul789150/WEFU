@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
+use App\ExtensionCart;
+use App\Address;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -12,6 +15,21 @@ class OrderController extends Controller
     public $unauth_error = 401;
 
     public function checkout_save_quantity(Request $request){
-        return response()->json(['success' => $request->all()], $this->success_status);
+
+        $data = $request->all();
+        $proucts_in_cart = ExtensionCart::where('user_id', Auth::user()->id)->get();
+
+        foreach($proucts_in_cart as $item){
+            $item->quantity = $data[$item->id];
+            $item->save();
+        }
+
+        return response()->json(['sucess' => "Data saved"], $this->success_status);
+    }
+
+    public function send_addresses(){
+        $address = Address::where('user_id', Auth::user()->id)->get();
+
+        return response()->json(['address' => $address], $this->success_status);
     }
 }
