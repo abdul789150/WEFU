@@ -424,6 +424,44 @@ img{
 .show > .btn-purple.dropdown-toggle:focus {
     box-shadow: 0 0 0 0.2rem #5a328e57;
 }
+/* ////// */
+.btn-stripepayment {
+    color: #fff;
+    background-color: #32325D;
+    border-color: #32325D;
+}
+  
+.btn-stripepayment:hover {
+    color: #fff;
+    background-color: #32325D;
+    border-color: #32325D;
+}
+  
+.btn-stripepayment:focus,
+.btn-stripepayment.focus {
+    box-shadow: 0 0 0 0.2rem #32325D57;
+}
+  
+.btn-stripepayment.disabled,
+.btn-stripepayment:disabled {
+    color: #fff;
+    background-color: #32325D;
+    border-color: #32325D;
+}
+  
+.btn-stripepayment:not(:disabled):not(.disabled):active,
+.btn-stripepayment:not(:disabled):not(.disabled).active,
+.show > .btn-stripepayment.dropdown-toggle {
+    color: #fff;
+    background-color: #32325D;
+    border-color: #32325D;
+}
+  
+.btn-stripepayment:not(:disabled):not(.disabled):active:focus,
+.btn-stripepayment:not(:disabled):not(.disabled).active:focus,
+.show > .btn-stripepayment.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem #32325D57;
+}
 
 .btn-orange {
     color: #fff;

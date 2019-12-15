@@ -282,7 +282,6 @@
 @endif
 <!-- Scripts -->
 <script src="{{ asset('js/bootstrap.js') }}"></script>
-<script src="https://js.stripe.com/v3/"></script>
 <script>
 
     var logout_div = document.getElementById("logout-div")
@@ -332,6 +331,7 @@
 
 </script>
 
-@stack('ScriptStack')
+@stack('script')
+
 </body>
 </html>
