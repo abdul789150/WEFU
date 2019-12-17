@@ -373,7 +373,7 @@
                     <h4><strong>Update Profile Picture</strong></h4>
                     <p>Upload your profile picture</p>
                     
-                    <form role="form" method="POST" action="{{ route('profileUpdate', $user[0]->username ) }}" enctype="multipart/form-data">
+                    <form role="form" method="POST" action="{{ route('profileImageUpdate') }}" enctype="multipart/form-data">
                         {!! csrf_field() !!}    
                         <div id="img_div" class="flex-column">
                             <p class="pl-4 pt-2"> <label for="img_up" class="col-form-label font-weight-bold"> Profile Picture</label></p>
@@ -381,7 +381,7 @@
                                 <img id="img_up" src="{{ URL::to('/storage/uploads/profile_pic/'.$user[0]->profile_img) }}" alt="placeholder" class="rounded-circle" width="150px" height="150px"  />
                             </p>
                             <div class="form-group col mr-3">
-                                <label for="profile_img" class="btn btn-light mr-2"> <i class="fa fa-cloud-upload"></i><strong> Upload Image</strong> </label>
+                                <label for="profile_img" class="btn btn-light mr-2"> <i class="fa fa-cloud-upload"></i><strong> Choose Image</strong> </label>
                                 <input type="file" class="icon-upload" id="profile_img" name="profile_img">
                                 <br>
                                 @if ($errors->has('profile_img'))
@@ -389,6 +389,9 @@
                                 @endif
                             </div>
                             
+                        </div>
+                        <div class="float-right mt-4">
+                            <button id="upd_pass" type="submit" class="btn btn-purple">save changes</button>
                         </div>
                     </form>    
                 </div>    

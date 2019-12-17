@@ -48,7 +48,13 @@ class CartController extends Controller
             $product = ExtensionCart::find($product_id);
             if($product != null){
                 $product->delete();
-                return response()->json(['success' => 'Product deleted fom cart'], 200);
+
+                $products = ExtensionCart::where('user_id', Auth::user()->id)->get();
+                if($products->count() == 0){
+                    return response()->json(['error' => 'Product not Found'], 401);                    
+                }
+
+                return response()->json(['data' => $products], 200);
             }
         }
 

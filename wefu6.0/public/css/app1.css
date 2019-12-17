@@ -1,5 +1,6 @@
 .custom-body{
     background-color: #6231a1; 
+    /* background-color: #242424; */
     color:white;
 }
 
@@ -424,6 +425,48 @@ img{
 .show > .btn-purple.dropdown-toggle:focus {
     box-shadow: 0 0 0 0.2rem #5a328e57;
 }
+
+
+/* ////////////////// */
+.btn-invoice-card {
+    color: #fff;
+    background-color: #6F6CFC;
+    border-color: #6F6CFC;
+}
+  
+.btn-invoice-card:hover {
+    color: #fff;
+    background-color: #6F6CFC;
+    border-color: #6F6CFC;
+}
+  
+.btn-invoice-card:focus,
+.btn-invoice-card.focus {
+    box-shadow: 0 0 0 0.2rem #6F6CFC57;
+}
+  
+.btn-invoice-card.disabled,
+.btn-invoice-card:disabled {
+    color: #fff;
+    background-color: #6F6CFC;
+    border-color: #6F6CFC;
+}
+  
+.btn-invoice-card:not(:disabled):not(.disabled):active,
+.btn-invoice-card:not(:disabled):not(.disabled).active,
+.show > .btn-invoice-card.dropdown-toggle {
+    color: #fff;
+    background-color: #6F6CFC;
+    border-color: #6F6CFC;
+}
+  
+.btn-invoice-card:not(:disabled):not(.disabled):active:focus,
+.btn-invoice-card:not(:disabled):not(.disabled).active:focus,
+.show > .btn-invoice-card.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem #6F6CFC57;
+}
+
+
 /* ////// */
 .btn-stripepayment {
     color: #fff;
@@ -1083,6 +1126,55 @@ input:focus{
     /* z-index: 1; */
     left: 0;
     right: 0;
+}
+
+.invoice-card{
+    width: 100%;
+    height: 370px;
+    border-radius: 1rem;
+}
+
+.invoice-card-head{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background-color: #6F6CFC;
+    color: white;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+}
+.invoice-card-body{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    right: 0;
+    height: 260px;
+    margin-top: 35%;
+}
+
+.invoice-text{
+    color: #6F6CFC;
+}
+
+.invoice-custom-back{
+    background-color: #F9FBFC;
+}
+
+.invoice-deck{
+    margin-right: -1.3%;
+    margin-left: -0.9%;
+    left: 0;
+    right: 0;
+    height: 78%;
+    overflow-x: scroll;
+    overflow-y: scroll;
+}
+.invoice-deck::-webkit-scrollbar
+{
+   display: none; 
+   background-color: #F5F5F5;
 }
 
 /* ///////////////////////////////////////////////////////////

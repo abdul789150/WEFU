@@ -193,10 +193,9 @@
                     <li class="dashboard-li" id="profile"> <a class="dashboard-anchor ml-3" href="{{ route('profile', $username) }}">My Profile</a></li>
                     <li class="dashboard-li" id="cart"> <a class="dashboard-anchor ml-3" href="{{ route('cart', $username) }}">Shopping Cart</a></li>
                     <li class="dashboard-li" id="orders"> <a class="dashboard-anchor ml-3" href="{{ route('ordersIndex') }}">My Orders</a></li>
-                    <li class="dashboard-li" id="payments"> <a class="dashboard-anchor ml-3" href="#">My Payments</a></li>
+                    <li class="dashboard-li" id="payments"> <a class="dashboard-anchor ml-3" href="{{route('myPayments')}}">My Payments</a></li>
                     <li class="dashboard-li" id="shippments"> <a class="dashboard-anchor ml-3" href="#">My Shippments</a></li>
                     <li class="dashboard-li" id="pricing_plans"> <a class="dashboard-anchor ml-3" href="#">Pricing Plans</a></li>
-                    <li class="dashboard-li" id="pricing_plans"> <a class="dashboard-anchor ml-3" href="{{route('paymentMethods')}}">Pay Now</a></li>
                 </ul>
             </div>
             @endhasrole
@@ -221,7 +220,7 @@
                 <div class="flex-column profile-card">
                     <div class="mt-5">
                         <div class="img-container-dashboard m-auto">
-                            <img src="{{ URL::to('/storage/uploads/profile_pic/default.jpg') }}" alt="placeholder" class="rounded-circle"/>
+                            <img src="{{ URL::to('/storage/uploads/profile_pic/'.Auth::user()->profile_img) }}" alt="placeholder" class="rounded-circle"/>
                         </div>
                         <div class="mt-3 text-center">
                             <h5>{{Auth::user()->full_name}}</h5>

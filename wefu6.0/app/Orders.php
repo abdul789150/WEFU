@@ -22,7 +22,7 @@ class Orders extends Model
     }
 
     function pricing_plan(){
-        return $this->belongsTo(PricingPlans::class);
+        return $this->belongsTo(PricingPlans::class, "pp_id");
     }
 
     function shopping_carts(){ 

@@ -6,6 +6,7 @@ use App\User;
 use App\Address;
 use Faker\Provider\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -60,24 +61,12 @@ class profile_controller extends Controller
         // dd($request->all());
         // profile_img, full_name, username, email, phone_no
         
-        if($request->has("profile_img")){
-            
-            $validator = Validator::make($request->all() ,[
-                'full_name' => 'required|string|max:191',
-                'email' => 'nullable|string|email|max:191|unique:users',
-                'phone_no' => 'nullable|max:11|digits:11',
-                'profile_img' => 'required',
-                'profile_img.*' => 'mimes:jpg,jpeg,png,bmp,tiff',
-            ]);
-
-        }
-        else{
-            $validator = Validator::make($request->all() ,[
-                'full_name' => 'required|string|max:191',
-                'email' => 'nullable|string|email|max:191|unique:users',
-                'phone_no' => 'nullable|max:11|digits:11',
-            ]);
-        }
+        $validator = Validator::make($request->all() ,[
+            'full_name' => 'required|string|max:191',
+            'email' => 'nullable|string|email|max:191|unique:users',
+            'phone_no' => 'nullable|max:11|digits:11',
+        ]);
+    
 
         if($validator->fails()){
             return redirect('profile/'.$username)->withErrors($validator);
@@ -85,16 +74,7 @@ class profile_controller extends Controller
 
         $data = $request->all();
         $user = $user = User::where('username', $username)->first();
-        if(array_key_exists("profile_img", $data)){
-            // save img
-            $image = $request->file('profile_img');
-            $filename = time().'.'.$image->getClientOriginalExtension();
-            
-            Storage::putFileAs('/public/uploads/profile_pic', $image, $filename);
-            
-            $user->profile_img = $filename;
-
-        }
+       
         if(array_key_exists("phone_no", $data)){
             $user->phone_no = $data["phone_no"];
         }
@@ -176,5 +156,28 @@ class profile_controller extends Controller
             return redirect()->route('profile', ['username' => $user->username]);
         }
 
+    }
+
+    public function update_profile_image(Request $request){
+        // $data = $request->all();
+        
+        $validator = Validator::make($request->all() ,[
+            'profile_img' => 'required|mimes:jpg,jpeg,png,bmp,tiff',
+        ]);
+
+        if($validator->fails()){
+            return redirect('profile/'.Auth::user()->username)->withErrors($validator);
+        }
+        // save img
+        $user = $user = User::where('username', Auth::user()->username)->first();
+        $image = $request->file('profile_img');
+        $filename = time().'.'.$image->getClientOriginalExtension();
+        
+        Storage::putFileAs('/public/uploads/profile_pic', $image, $filename);
+        
+        $user->profile_img = $filename;
+        $user->save();
+
+        return redirect('profile/'.Auth::user()->username);
     }
 }

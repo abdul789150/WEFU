@@ -76,36 +76,36 @@
                 <div class="p-4">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input id="name" type="text" class="custom-inputs" value="AbdulRehman" name="full_name">
+                        <input id="name" type="text" class="custom-inputs" value="{{$order->user->full_name}}" name="full_name">
                     </div>
                     <div class="row mt-n1">
                         <div class="col-lg-6 from-group">
                             <label for="email">Email</label>
-                            <input id="email" type="email" class="custom-inputs" value="abdul789150@gmail.com" name="email">
+                            <input id="email" type="email" class="custom-inputs" value="{{$order->user->email}}" name="email">
                         </div>
                         <div class="col-lg-6 from-group">
                             <label for="phone">Phone</label>
-                            <input id="phone" type="text" class="custom-inputs" value="03359059199" name="phone_no">
+                            <input id="phone" type="text" class="custom-inputs" value="{{$order->user->phone_no}}" name="phone_no">
                         </div>
                     </div>
                     
                     <div class="form-group mt-2">
                         <label for="address">Address</label>
-                        <input id="address" type="text" class="custom-inputs" value="Quetta" name="address">
+                        <input id="address" type="text" class="custom-inputs" value="{{$order->address->delivery_address}}" name="address">
                     </div>
 
                     <div class="row mt-n1">
                         <div class="col-lg-4 from-group">
                             <label for="city">City</label>
-                            <input id="city" type="text" class="custom-inputs" value="Quetta" name="city">
+                            <input id="city" type="text" class="custom-inputs" value="{{$order->address->city}}" name="city">
                         </div>
                         <div class="col-lg-4 from-group">
                             <label for="province">Province</label>
-                            <input id="province" type="text" class="custom-inputs" value="Balochistan" name="province">
+                            <input id="province" type="text" class="custom-inputs" value="{{$order->address->province}}" name="province">
                         </div>
                         <div class="col-lg-4 from-group">
                             <label for="zipcode">Zipcode</label>
-                            <input id="zipcode" type="text" class="custom-inputs" value="01922" name="zipcode">
+                            <input id="zipcode" type="text" class="custom-inputs" value="{{$order->address->zipcode}}" name="zipcode">
                         </div>
                     </div>
                     <div class="form-group mt-2"> 
@@ -119,8 +119,8 @@
                         <!-- Used to display form errors. -->
                         <div id="card-errors" class="text-danger" role="alert"></div>
                     </div>
-
-                    <button class="btn btn-stripepayment w-100">Pay PKR 6123313</button>
+                    <input type="text" name="order_id" id="order" value="{{$order->id}}" hidden>
+                    <button id="price_btn" class="btn btn-stripepayment w-100" style="height: 40px;"></button>
                 </div>     
             </form>
         {{-- Ending payment Stripe --}}
@@ -132,9 +132,15 @@
 
 <script>
     window.onload = function(){
-        $("#alert").fadeTo(500, 500).slideUp(500, function(){
+        $( "#dashboard-options li" ).removeClass( "dashboard-li-selected" );
+        $( "#payments" ).addClass( "dashboard-li-selected" );
+
+        $("#alert").fadeTo(1000, 500).slideUp(500, function(){
             $("#alert").slideUp(500);
         });
+        
+        $("#price_btn").html("Pay PKR "+numberWithCommas({{$order->total_price}} + {{$order->pricing_plan->price}}));
+
     }
 
 </script>

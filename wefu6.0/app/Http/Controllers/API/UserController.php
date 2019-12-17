@@ -147,7 +147,24 @@ class UserController extends Controller
         return response()->json(['address' => $addresses], $this->success_status);
     }
 
+    public function delete_address(Request $request){
+        $data = $request->all();
 
+        try{
+            Address::where('id', $data["address_id"])->delete();
+        }catch(Exception $e){
+            return response()->json(['error' => 'Unable to delete address'], $this->unauth_error);
+        }
+
+
+        $addresses = Address::where('user_id', Auth::user()->id)->get();
+
+        if($addresses->count() == 0){
+            return response()->json(['error' => 'No address Found'], $this->unauth_error);
+        }
+
+        return response()->json(['address' => $addresses], $this->success_status);
+    }
 
 
 }

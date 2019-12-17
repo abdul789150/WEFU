@@ -22,7 +22,7 @@ Route::get('/profile/{username}', 'profile_controller@index')->name('profile');
 ////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 Route::post('/profile/update/pass/{username}', 'profile_controller@passUpdate')->name('profileUpdatePass');
 Route::post('/profile/update/{username}', 'profile_controller@dataUpdate')->name('profileUpdate');
-
+Route::post('/profileImageUpdate', 'profile_controller@update_profile_image')->name('profileImageUpdate');
 ////////////////////////////////////////////////////////////////////////////////
 //
 //
@@ -41,8 +41,9 @@ Route::group(['prefix' => 'customer', 'middleware' => 'role:customer'],function(
     Route::get('/orderConfirmation/{address_id}/{pp_id}', 'order_controller@order_confirmation')->name('orderConfirmation');
     Route::get('/orders/completedOrders', 'order_controller@completed_orders')->name('completedOrders');
     Route::get('/orders/incompleteOrders', 'order_controller@incomplete_orders')->name('incompleteOrders'); 
-    Route::get('/paymentMethods','PaymentController@payment_index')->name('paymentMethods');   
-///////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\//////////\\\\\
+    Route::get('/payNow/{id}','PaymentController@payment_index')->name('payNow');   
+    Route::get('/myPayments','PaymentController@my_payments')->name('myPayments');
+    ///////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\//////////\\\\\
     Route::post('/profile/addAddress/{username}', 'profile_controller@add_address')->name('insertAddress');
     Route::post('/checkout','cart_controller@checkout')->name('checkout');
     Route::post('/selectedAddress','order_controller@selected_address')->name('selectedAddress');
@@ -53,13 +54,13 @@ Route::group(['prefix' => 'customer', 'middleware' => 'role:customer'],function(
 });
 
 
-////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
 //
 //
 //      ADMIN ROUTES
 //
 //
-///////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
 
 Route::group(['prefix' => 'admin', 'middleware' => 'role:admin'],function(){
     Route::get('/ordersList','Admin\OrderController@orders_list')->name('ordersList');
