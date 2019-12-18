@@ -33,6 +33,7 @@ Route::middleware('auth:api')->post('/productsCheckout', 'API\OrderController@ch
 Route::middleware('auth:api')->post('/pricingPlan', 'API\OrderController@get_pricing_plan');
 Route::middleware('auth:api')->post('/deleteAddress', 'API\UserController@delete_address');
 Route::middleware('auth:api')->post('/deleteProduct','API\CartController@delete_from_cart');
+Route::middleware('auth:api')->post('/confirmOrder','API\OrderController@confirm_order');
 
 
 

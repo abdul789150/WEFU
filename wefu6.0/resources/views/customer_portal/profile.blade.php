@@ -338,8 +338,8 @@
                                         </p>
                                     </div>
                                     <div class="card-footer">
-                                        <a href="#" class="card-link">Update</a>
-                                        <a href="#" class="card-link">Delete</a>
+                                        {{-- <a href="#" class="card-link">Update</a> --}}
+                                        <a href="{{route('deleteAddress', $address->id)}}" class="card-link">Delete</a>
                                     </div>
                                 </div>
                             </div>

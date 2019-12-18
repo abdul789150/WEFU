@@ -109,11 +109,11 @@ class UserController extends Controller
 
         $validator = Validator::make($request->all() ,[
             'username' => 'required|unique:users',
-            'phone_no' => 'required',
+            'phone_no' => 'required|max:11',
         ]);
             
         if($validator->fails()){
-            return response()->json(['error' => 'Username already taken'], $this->unauth_error);
+            return response()->json(['error' => $validator->errors()], $this->unauth_error);
         }
         // $image = $request->file->store('uploads/profile_pic');
         // $image = $request->file->getClientOriginalName();

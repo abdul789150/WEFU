@@ -29,7 +29,9 @@ class Orders extends Model
         return $this->hasMany(Cart::class, "order_id");
     }
 
-
+    function shipments(){
+        return $this->hasMany(Shippment::class, "order_id");
+    }
 
 
 }

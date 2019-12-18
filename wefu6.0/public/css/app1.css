@@ -961,8 +961,9 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 }
 
 .login-img-div{
-    height: 480px;
-    width: 500px;
+    position: absolute;
+    width: 480px;
+    height: 500px;
 }
 
 
@@ -1134,6 +1135,12 @@ input:focus{
     border-radius: 1rem;
 }
 
+.invoice-card-1{
+    width: 100%;
+    height: 370px;
+    border-radius: 1rem;
+}
+
 .invoice-card-head{
     position: absolute;
     width: 100%;
@@ -1176,6 +1183,27 @@ input:focus{
    display: none; 
    background-color: #F5F5F5;
 }
+
+.cart-div{
+    height: 400px;
+    overflow: scroll;
+}
+.cart-div::-webkit-scrollbar
+{
+   display: none; 
+   background-color: #F5F5F5;
+}
+
+.address-div{
+    height: 80%;
+    overflow: scroll;
+}
+.address-div::-webkit-scrollbar
+{
+   display: none; 
+   background-color: #F5F5F5;
+}
+
 
 /* ///////////////////////////////////////////////////////////
 //

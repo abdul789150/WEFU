@@ -278,7 +278,7 @@ class order_controller extends Controller
         $order->total_price = $total_price;
         $order->save();
 
-        return response()->json(['success' => 'Order confirmed'], 200);
+        return response()->json(['success' => $order->id], 200);
     }
 
 

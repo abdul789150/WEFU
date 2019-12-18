@@ -79,10 +79,10 @@
     </div>
 </div> --}}
 
-    <div class="container col-lg-9">
+    <div class="container col-xl-8 col-lg-9">
         <div class="mt-4 custom-radius shadow border" style="height: 480px;">
             
-            <div class="col-lg-6 float-left">
+            <div class="col-xl-6 col-lg-6 float-left">
 
                 <div class="login-img-div" style="display: none;">
                     <img src="{{ URL::to('/storage/uploads/web_images/Limage.JPG') }}" alt="" class="custom-radius-dashboard">
@@ -99,9 +99,9 @@
         
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
-                                <div class="form-group row col-lg-8 m-auto">
+                                <div class="form-group row col-xl-8 col-lg-8 m-auto">
         
-                                    <div class="mt-4">
+                                    <div class="mt-4 w-100">
                                         <input
                                             id="username_email"
                                             type="text"
@@ -120,8 +120,8 @@
         
                                     </div>
                                 </div>
-                                <div class="form-group row col-lg-8 m-auto">
-                                    <div class="mt-2">
+                                <div class="form-group row col-xl-8 col-lg-8 m-auto">
+                                    <div class="mt-2 w-100">
                                         <input
                                             id="password"
                                             type="password"
@@ -140,7 +140,7 @@
                                 {{-- <a class="btn btn-link" href="{{ route('password.request') }}">
                                     Forgot Your Password?
                                 </a> --}}
-                                <div class="form-group row col-lg-8 m-auto">
+                                <div class="form-group row col-xl-8 col-lg-8 m-auto">
                                     <div class="flex-column w-100 ml-n1 mt-4">
                                         <button type="submit" class="btn btn-purple w-60">
                                             Login
@@ -165,7 +165,7 @@
 
             </div>
 
-            <div class="col-lg-6 float-right">
+            <div class="col-xl-6 col-lg-6 float-right">
                 <div class="login-img-div">
                     <img src="{{ URL::to('/storage/uploads/web_images/Simage.JPG') }}" alt="" class="custom-radius-1">
                 </div>

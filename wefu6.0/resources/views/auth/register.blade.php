@@ -114,16 +114,16 @@
 
 
 
-    <div class="container col-lg-9">
+    <div class="container col-xl-8 col-lg-9">
         <div class="mt-4 custom-radius shadow border" style="height: 480px;">
             
-            <div class="col-lg-6 float-left ml-n3">
+            <div class="col-xl-6 col-lg-6 float-left ml-n3">
                 <div class="login-img-div">
                     <img src="{{ URL::to('/storage/uploads/web_images/Limage.JPG') }}" alt="" class="custom-radius-dashboard">
                 </div>
             </div>
 
-            <div class="col-lg-6 float-right">
+            <div class="col-xl-6 col-lg-6 float-right">
                 <div>
                     <div class="container text-center pt-2">
                         <h2>Hey there! let's</h2>
@@ -136,8 +136,8 @@
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
 
-                            <div class="form-group row col-lg-8 m-auto">
-                                <div class="mt-2">
+                            <div class="form-group row col-xl-8 col-lg-8 m-auto">
+                                <div class="mt-2 w-100">
                                     <input
                                         type="text"
                                         class="form-control{{ $errors->has('full_name') ? ' is-invalid' : '' }}"
@@ -153,8 +153,8 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row col-lg-8 m-auto">
-                                <div class="mt-2">
+                            <div class="form-group row col-xl-8 col-lg-8 m-auto">
+                                <div class="mt-2 w-100">
                                     <input
                                         type="text"
                                         class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}"
@@ -170,8 +170,8 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row col-lg-8 m-auto">
-                                <div class="mt-2">
+                            <div class="form-group row col-xl-8 col-lg-8 m-auto">
+                                <div class="mt-2 w-100">
                                     <input
                                         id="username_email"
                                         type="text"
@@ -190,8 +190,8 @@
     
                                 </div>
                             </div>
-                            <div class="form-group row col-lg-8 m-auto">
-                                <div class="mt-2">
+                            <div class="form-group row col-xl-8 col-lg-8 m-auto">
+                                <div class="mt-2 w-100">
                                     <input
                                         id="password"
                                         type="password"
@@ -207,8 +207,8 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="form-group row col-lg-8 m-auto">
-                                <div class="mt-2">
+                            <div class="form-group row col-xl-8 col-lg-8 m-auto">
+                                <div class="mt-2 w-100">
                                     <input
                                         type="password"
                                         class="form-control{{ $errors->has('password_confirmation') ? ' is-invalid' : '' }}"
@@ -223,7 +223,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row col-lg-8 m-auto">
+                            <div class="form-group row col-xl-8 col-lg-8 m-auto">
                                 <div class="flex-column w-100 mt-4">
                                     <button type="submit" class="btn btn-purple w-60">
                                         Sign up

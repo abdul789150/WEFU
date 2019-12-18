@@ -43,6 +43,10 @@ Route::group(['prefix' => 'customer', 'middleware' => 'role:customer'],function(
     Route::get('/orders/incompleteOrders', 'order_controller@incomplete_orders')->name('incompleteOrders'); 
     Route::get('/payNow/{id}','PaymentController@payment_index')->name('payNow');   
     Route::get('/myPayments','PaymentController@my_payments')->name('myPayments');
+    Route::get('/myShippments','ShipmentController@my_shipments')->name('myShippments');
+    Route::get('/shipmentDetail/{id}','ShipmentController@shipment_detail')->name('shipmentDetail');
+    Route::get('/cartDelete/{id}','cart_controller@delete_product')->name('cartDelete');
+    Route::get('/deleteAddress/{id}','profile_controller@delete_address')->name('deleteAddress');
     ///////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\//////////\\\\\
     Route::post('/profile/addAddress/{username}', 'profile_controller@add_address')->name('insertAddress');
     Route::post('/checkout','cart_controller@checkout')->name('checkout');

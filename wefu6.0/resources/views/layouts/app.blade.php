@@ -194,7 +194,7 @@
                     <li class="dashboard-li" id="cart"> <a class="dashboard-anchor ml-3" href="{{ route('cart', $username) }}">Shopping Cart</a></li>
                     <li class="dashboard-li" id="orders"> <a class="dashboard-anchor ml-3" href="{{ route('ordersIndex') }}">My Orders</a></li>
                     <li class="dashboard-li" id="payments"> <a class="dashboard-anchor ml-3" href="{{route('myPayments')}}">My Payments</a></li>
-                    <li class="dashboard-li" id="shippments"> <a class="dashboard-anchor ml-3" href="#">My Shippments</a></li>
+                    <li class="dashboard-li" id="shippments"> <a class="dashboard-anchor ml-3" href="{{route('myShippments')}}">My Shippments</a></li>
                     <li class="dashboard-li" id="pricing_plans"> <a class="dashboard-anchor ml-3" href="#">Pricing Plans</a></li>
                 </ul>
             </div>

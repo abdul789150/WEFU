@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use PHPUnit\Runner\Exception;
 
 class profile_controller extends Controller
 {
@@ -179,5 +180,16 @@ class profile_controller extends Controller
         $user->save();
 
         return redirect('profile/'.Auth::user()->username);
+    }
+
+    public function delete_address($id){
+
+        try{
+            Address::where('id', $id)->delete();
+        }catch(Exception $e){
+
+        }
+
+        return redirect()->back();
     }
 }

@@ -182,7 +182,7 @@
                         <a href="{{route('home')}}" class="btn btn-outline-purple ml-2">Pay Later</a>
                     </div>
                     <div class="float-right mt-2">
-                        <a href="#" class="btn btn-orange mr-2">Pay Now</a>
+                        <a id="pay-now-btn" class="btn btn-orange mr-2">Pay Now</a>
                     </div>
                 </div>
             </div>
@@ -252,6 +252,10 @@
                         backdrop: 'static',
                         keyboard: false
                     })
+
+                    var route = "{{route('payNow', ':id')}}"
+                    route = route.replace(':id', result["success"])
+                    $("#pay-now-btn").attr('href', route);
                     $("#confirmationModel").modal('show');
                     
                     $(".check-icon").hide();

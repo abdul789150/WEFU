@@ -112,5 +112,14 @@ class cart_controller extends Controller
         return redirect('/customer/shippmentDetails');
     }    
 
+    public function delete_product($id){
 
+        $product = ExtensionCart::find($id);
+        if($product != null){
+            $product->delete();
+
+            return redirect()->back();
+        }
+        return redirect()->back()->with('error', "Product is not deleted");
+    }
 }

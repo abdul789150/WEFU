@@ -30,7 +30,7 @@
         @endif
 
         <div class="p-4">
-            <h2 class="float-left"><strong>My Payments</strong></h2>
+            <h2 class="float-left">My Payments</h2>
         </div>
 
         <div class="mt-5">
