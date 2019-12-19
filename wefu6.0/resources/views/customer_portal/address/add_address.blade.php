@@ -1,11 +1,14 @@
 @extends('layouts.app')
 
-@section('home')
+{{-- @section('home')
     <li>
         <a href="{{ route('home') }}">Home</a>
     </li>
-@endsection
+@endsection --}}
 
+@push('style')
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">    
+@endpush
 
 @section('content')
     <div class="col-lg-8 custom-radius-dashboard bg-white h-98 mt-1 float-right text-dark">
@@ -15,7 +18,7 @@
             <p>Please fill all required fields correctly</p>
         </div>
 
-        <div class="pl-4 pr-4 pt-2">
+        <div class="pl-4 pr-4 add-address-div">
         
             <form role="form" method="POST" action="{{ route('insertAddress', $user[0]->username) }}">
                 {!! csrf_field() !!}
@@ -73,7 +76,7 @@
                     </div>
                     <div class="form-group col-lg-6">
                         <label for="city" class="col-form-label"><strong> City </strong></label>
-                        <div class="">
+                        <div class="ui-widget" style="">
                             <input
                                 id="city"
                                 type="text"
@@ -94,7 +97,7 @@
                 <div class="form-group row">
                     <div class="form-group col-lg-6">
                         <label for="province" class="col-form-label"><strong> Province </strong></label>
-                        <div class="">
+                        <div class="ui-widget">
                             <input
                                 id="province"
                                 type="text"
@@ -198,3 +201,42 @@
         } 
     </script>
 @endif 
+
+@push('script')
+    <script
+    src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+    integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
+    crossorigin="anonymous"></script>
+
+    <script>
+
+        var province_array = ["Balochistan","Punjab", "khyber pakhtunkhwa", "Sindh"];
+        $("#province").autocomplete({
+            source:province_array
+        });
+        console.log($("#city").val())        
+
+        var cities_array = [
+            // "Karachi","Lahore","Faisalabad","Serai","Rāwalpindi","Multān","Gujrānwāla","Hyderābād City",
+            // "Peshāwar","Abbottābād","Islamabad","Quetta","Bannu","Bahāwalpur","Sargodha","Siālkot City",
+            // "Sukkur","Lārkāna","Sheikhupura","Mīrpur Khās","Rahīmyār Khān","Kohāt","Jhang Sadr","Gujrāt",
+            // "Bardār","Kasūr","Dera Ghāzi Khān","Masīwāla","Nawābshāh","Okāra","Gilgit","Chiniot","Sādiqābād",
+            // "Turbat","Dera Ismāīl Khān","Chaman","Zhob","Mehra","Parachinār","Gwādar","Kundiān","Shahdād Kot",
+            // "Harīpur","Matiāri","Dera Allāhyār","Lodhrān","Batgrām","Thatta","Bāgh","Badīn","Mānsehra","Ziārat",
+            // "Muzaffargarh","Tando Allāhyār","Dera Murād Jamāli","Karak","Mardan","Uthal","Nankāna Sāhib",
+            // "Bārkhān","Hāfizābād","Kotli","Loralai","Dera Bugti","Jhang City","Sāhīwāl","Sānghar","Pākpattan",
+            // "Chakwāl","Khushāb","Ghotki","Kohlu","Khuzdār","Awārān","Nowshera","Chārsadda","Qila Abdullāh",
+            // "Bahāwalnagar","Dādu","Alīābad","Lakki Marwat","Chilās","Pishin","Tānk","Chitrāl","Qila Saifullāh",
+            // "Shikārpur","Panjgūr","Mastung","Kalāt","Gandāvā","Khānewāl","Nārowāl","Khairpur","Malakand",
+            // "Vihāri","Saidu Sharif","Jhelum","Mandi Bahāuddīn","Bhakkar","Toba Tek Singh","Jāmshoro","Khārān","Umarkot",
+            // "Hangu","Timargara","Gākuch","Jacobābād","Alpūrai","Miānwāli","Naushahro Fīroz","New Mīrpur",
+            // "Daggar","Eidgāh","Sibi","Dālbandīn","Rājanpur","Leiah","Upper Dir","Tando Muhammad Khān",
+            // "Attock City","Rāwala Kot","Swābi","Kandhkot","Dasu","Athmuqam",
+        ]
+
+        $("#city").autocomplete({
+            source:cities_array
+        });
+    </script>
+
+@endpush

@@ -4,8 +4,8 @@
 
     <div class="container bg-white col-lg-8 custom-radius-dashboard h-98 mt-1 float-right text-dark">
         
-        <div class="pt-5 pl-5">
-            <h2><strong>My Cart</strong></h2>
+        <div class="pt-3 pl-5">
+            <h2>My Cart</h2>
         </div>
 
         @php
@@ -14,8 +14,8 @@
         
         @if ($length == 0)
         
-            <div id="empty_cart" class="">
-                <h5><strong>Your cart is empty</strong></h5>
+            <div id="empty_cart" class="text-center mt-5 text-danger">
+                <h5>Your cart is Empty</h5>
             </div>
         
         @else

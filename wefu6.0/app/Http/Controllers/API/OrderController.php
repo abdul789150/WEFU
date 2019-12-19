@@ -99,4 +99,24 @@ class OrderController extends Controller
         return response()->json(['details' => $array_order], 200);
 
     }
+
+    public function confirm_payment(Request $request){
+        $data = $request->all();
+
+        $order = Orders::where('id', $data["order_id"])->first();
+        $order->payment_completed = true;
+
+        return response()->json(['successs' => "payment has been completed"], 200);
+    }
+
+    public function incomplete_order(){
+
+        $incomplete_orders = Orders::where('user_id', Auth::user()->id) 
+                                    ->where('payment_completed', false)->get();
+        if($incomplete_orders == null){
+            return response()->json(['error' => "No incomplete orders"], 401);;
+        }
+        return response()->json(['i_order' => $incomplete_orders], 200);
+    }
+
 }

@@ -39,9 +39,7 @@ class order_controller extends Controller
             // dd($completed_orders[$i]->midday_val);
         }
 
-        $incomplete_orders = Orders::where('user_id', Auth::user()->id)
-        ->where('payment_completed', false)
-        ->orWhere('is_delivered', false)->get();
+        $incomplete_orders = Orders::where('user_id', Auth::user()->id)->get();
 
         // dd($incomplete_orders);
 

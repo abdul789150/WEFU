@@ -110,7 +110,7 @@ class profile_controller extends Controller
                 'delivery_address' => 'required',
                 'city' => 'required',
                 'province' => 'required',
-                'phone_no' => 'required',
+                'phone_no' => 'required|digits:11|max:11',
                 'zipcode' => 'required',
             ]);
 
