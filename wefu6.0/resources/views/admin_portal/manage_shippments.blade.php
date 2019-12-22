@@ -165,14 +165,17 @@
                                         
                                         <tr class="shipment-orders-row">
                                             <td class="text-primary">{{$i}}</td>
-                                            <td> <strong>#</strong>{{$order->id}}</td>
+                                            <td>{{$order->order_number}}</td>
                                             <td>
                                                 {{-- <div class="d-inline-block text-truncate ml-n4" style="max-width: 250px;">  --}}
                                                 {{$order->user->full_name}} 
                                                 {{-- </div>     --}}
                                             </td>
                                             <td>
-                                                {{$order->total_price}}
+                                                <strong>PKR </strong><span id="order-price-{{$order->id}}"></span>
+                                                <script>
+                                                    document.getElementById("order-price-{{$order->id}}").innerHTML = numberWithCommasInvoice({{$order->total_price}}); 
+                                                </script>
                                             </td>
                                             <td>
                                                 <a href="{{route('ordersDetails', $order->id)}}" class="btn btn-purple">Details</a>
@@ -218,14 +221,17 @@
                                         
                                         <tr class="shipment-orders-row">
                                             <td class="text-primary">{{$i}}</td>
-                                            <td> <strong>#</strong>{{$order->id}}</td>
+                                            <td>{{$order->order_number}}</td>
                                             <td>
                                                 {{-- <div class="d-inline-block text-truncate ml-n4" style="max-width: 250px;">  --}}
                                                 {{$order->user->full_name}} 
                                                 {{-- </div>     --}}
                                             </td>
                                             <td>
-                                                {{$order->total_price}}
+                                                <strong>PKR </strong><span id="order-price-{{$order->id}}"></span>
+                                                <script>
+                                                    document.getElementById("order-price-{{$order->id}}").innerHTML = numberWithCommasInvoice({{$order->total_price}}); 
+                                                </script>
                                             </td>
                                             <td>
                                                 <a href="{{route('ordersDetails', $order->id)}}" class="btn btn-purple">Details</a>
@@ -259,7 +265,11 @@
     </div>
 
 @endsection
-
+<script>
+    function numberWithCommasInvoice(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+</script>
 <script>
     window.onload = function(){
         $( "#dashboard-options li" ).removeClass( "dashboard-li-selected" );

@@ -43,7 +43,7 @@
                                             <div class="pl-4 pt-4 ml-2 col-lg-12 float-left">
                                                 <h4>Track Shipment</h4>
                                                 <div class="mt-n2">
-                                                    <span>#373-17101996</span> <br>
+                                                    <span>{{$order->order_number}}</span> <br>
                                                     {{-- <span><strong>22 Apr 2019</strong></span> --}}
                                                     <span><strong id="date-{{$shipment->id}}"></strong></span>
                                                     <script>

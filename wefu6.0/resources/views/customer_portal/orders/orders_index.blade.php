@@ -60,7 +60,7 @@
                                                 </span>
                                                 <span class="price-circle ml-n4 mt-n2"></span>
                                             </div>
-                                            <span class="font-weight-bold order_number" style="font-size: 0.9375rem;">#{{$order->id}}</span>
+                                            <span class="font-weight-bold order_number" style="font-size: 0.9375rem;">{{$order->order_number}}</span>
                                         </div>
                                         {{-- <hr> --}}
                                         <div id="purchase_section" class="mt-4">
@@ -156,7 +156,7 @@
                                 <div class="m-auto card-deck">
                             @endif
                             
-                            @if ($order->is_delivered == flase || $order->payment_completed == false)
+                            @if ($order->is_delivered == false || $order->payment_completed == false)
                                 <div class="col-xl-5 col-lg-6 col-md-10 col-sm-10 col-12 order_card mt-4 ml-4">
                                     <div class="card mr-n4 bg-white shadow custom-radius">
                                         <div class="card-body">
@@ -167,7 +167,7 @@
                                                     </span>
                                                     <span class="price-circle ml-n4 mt-n2"></span>
                                                 </div>
-                                                <span class="font-weight-bold order_number" style="font-size: 0.9375rem;">#{{$order->id}}</span>
+                                                <span class="font-weight-bold order_number" style="font-size: 0.9375rem;">{{$order->order_number}}</span>
                                             </div>
                                             {{-- <hr> --}}
                                             <div id="purchase_section" class="mt-4">

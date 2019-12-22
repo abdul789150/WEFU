@@ -67,7 +67,7 @@
                                     <div class="pl-4 pt-4 ml-2 col-lg-6 float-left">
                                         <h4>Invoice</h4>
                                         <div class="mt-n2">
-                                            <span>#373-17101996</span> <br>
+                                            <span>{{$item->order_number}}</span> <br>
                                             <span><strong id="date-{{$item->id}}"></strong></span>
                                             <script>
                                                 var temp_date = "{{$item->updated_at}}";
@@ -203,7 +203,7 @@
                                     <div class="pl-4 pt-4 ml-2 col-lg-6 float-left">
                                         <h4>Invoice</h4>
                                         <div class="mt-n2">
-                                            <span>#373-17101996</span> <br>
+                                            <span>{{$item->order_number}}</span> <br>
                                             <span><strong id="date-{{$item->id}}"></strong></span>
                                             <script>
                                                 var temp_date = "{{$item->updated_at}}";

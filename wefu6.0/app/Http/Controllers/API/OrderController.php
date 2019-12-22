@@ -46,6 +46,11 @@ class OrderController extends Controller
         $order->user_id = Auth::user()->id;
         $order->address_id = $data["address_id"];
         $order->pp_id = $data["pp_id"];
+
+        // Generating order number like #00000012 and saving it
+        $latestOrder = Orders::orderBy('created_at','DESC')->first();
+        $order->order_number = '#'.str_pad($latestOrder->id + 1, 8, "0", STR_PAD_LEFT);
+
         $order->save();
 
         // $order_id = $order->id;
@@ -94,10 +99,22 @@ class OrderController extends Controller
         $order->total_price = $total_price;
         $order->save();
         $address = Address::Where('id', $data["address_id"])->first();
-        $array_order = [$order->id, $address->delivery_address];
+        $total_price = $order->total_price + $order->pricing_plan->price;
+        $array_order = [$order->id, $address->delivery_address, $total_price];
 
         return response()->json(['details' => $array_order], 200);
 
+    }
+
+    public function order_payment_details(Request $request){
+        
+        $data = $request->all();
+        $order = Orders::where('id', $data["order_id"])->first();
+        $total_price = $order->total_price + $order->pricing_plan->price;
+        $address = $order->address->delivery_address;
+        $details = [$order->id, $address, $total_price];
+
+        return response()->json(['details' => $details], 200);
     }
 
     public function confirm_payment(Request $request){
@@ -105,6 +122,7 @@ class OrderController extends Controller
 
         $order = Orders::where('id', $data["order_id"])->first();
         $order->payment_completed = true;
+        $order->save();
 
         return response()->json(['successs' => "payment has been completed"], 200);
     }

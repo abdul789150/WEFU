@@ -36,6 +36,7 @@ Route::middleware('auth:api')->post('/deleteProduct','API\CartController@delete_
 Route::middleware('auth:api')->post('/confirmOrder','API\OrderController@confirm_order');
 Route::middleware('auth:api')->post('/confirmPayment', 'API\OrderController@confirm_payment');
 Route::middleware('auth:api')->post('/incompleteOrder', 'API\OrderController@incomplete_order');
+Route::middleware('auth:api')->post('/payLater', 'API\OrderController@order_payment_details');
 
 
 

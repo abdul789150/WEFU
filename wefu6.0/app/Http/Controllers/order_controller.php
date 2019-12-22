@@ -228,6 +228,11 @@ class order_controller extends Controller
         $order->user_id = Auth::user()->id;
         $order->address_id = $data["address_id"];
         $order->pp_id = $data["pp_id"];
+
+        // Generating order number like #00000012 and saving it
+        $latestOrder = Orders::orderBy('created_at','DESC')->first();
+        $order->order_number = '#'.str_pad($latestOrder->id + 1, 8, "0", STR_PAD_LEFT);
+
         $order->save();
 
         // $order_id = $order->id;

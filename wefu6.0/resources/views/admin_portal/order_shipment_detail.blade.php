@@ -159,7 +159,7 @@
                 <div class="card-header" style="background-color: #478543; height: 35px;">
             @endif
                     <div class="text-white mt-n1">
-                        <span style="font-size: 14px; font-weight:600;">Order Number : {{$order->id}}</span>
+                        <span style="font-size: 14px; font-weight:600;">Order Number : {{$order->order_number}}</span>
                     </div>
                 </div>
                 <div class="card-body">
@@ -176,12 +176,17 @@
 
                     <div class="mt-n2 col-lg-2 float-left">
                         <span class="text-muted" style="font-size: 14px; font-weight:600;">Total Quantity: </span><br>
-                        <span class="ml-2" style="font-weight:600;"> {{$quantity}} items</span><br>
+                        @if($quantity == 1)
+                            <span class="ml-2" style="font-weight:600;"> {{$quantity}} item</span><br>                    
+                        @else
+                            <span class="ml-2" style="font-weight:600;"> {{$quantity}} items</span><br>
+                        @endif
+
                     </div>
 
                     <div class="mt-n2 col-lg-3 float-left">
                         <span class="text-muted" style="font-size: 14px; font-weight:600;">Total Price: </span><br>
-                        <span class="ml-2" style="font-weight:600;">PKR</span> {{$order->total_price}}<br>
+                        <span class="ml-2" style="font-weight:600;">PKR </span> <span id="price-span"></span><br>
                     </div>
 
                     <div class="mt-n2 col-lg-3 float-left">
@@ -225,6 +230,9 @@
     window.onload = function(){
         $( "#dashboard-options li" ).removeClass( "dashboard-li-selected" );
         $( "#manageShippments" ).addClass( "dashboard-li-selected" );
+
+        var price = {{$order->total_price}}
+        document.getElementById("price-span").innerHTML = numberWithCommas(price);
 
         var add = @json($order->address->city);
         var prov = @json($order->address->province);

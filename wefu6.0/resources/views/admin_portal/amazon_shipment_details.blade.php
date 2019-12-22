@@ -172,7 +172,12 @@
 
                     <div class="mt-n2 col-lg-3 float-left">
                         <span class="text-muted" style="font-size: 14px; font-weight:600;">Total Quantity: </span><br>
-                        <span class="ml-2" style="font-weight:600;"> {{$quantity}} items</span><br>
+                        @if($quantity == 1)
+                            <span class="ml-2" style="font-weight:600;"> {{$quantity}} item</span><br>                    
+                        @else
+                            <span class="ml-2" style="font-weight:600;"> {{$quantity}} items</span><br>
+                        @endif
+
                     </div>
 
                     <div class="mt-n2 col-lg-3 float-left">

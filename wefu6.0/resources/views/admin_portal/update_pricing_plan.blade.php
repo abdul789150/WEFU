@@ -4,7 +4,12 @@
 
     <div class="col-lg-8 custom-radius-dashboard bg-white float-right h-98 mt-1 text-dark">
         <div class="container pt-4">
-
+            @if ($message = Session::get('success'))
+                <div id="alert" class="mt-4 alert alert-success alert-block col-lg-6 float-right">
+                    {{$message}}
+                </div>
+            @endif
+            
             <h3> <strong> Update Pricing Plans </strong> </h3> 
             <p>
                 Please fill up the details correctly  
@@ -68,5 +73,9 @@
     window.onload = function(){
         $( "#dashboard-options li" ).removeClass( "dashboard-li-selected" );
         $( "#UpdatePricingPlan" ).addClass( "dashboard-li-selected" );
+
+        $("#alert").fadeTo(1000, 500).slideUp(500, function(){
+            $("#alert").slideUp(500);
+        });
     }
 </script>

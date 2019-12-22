@@ -179,9 +179,12 @@
                                             name="email"
                                             placeholder="Your Email"
                                             value="{{ old('email') }}"
+                                            title="test@test.com"
                                             autofocus
                                         >
-        
+                                        <div class="mt-2">
+                                            <small id="email-error"></small>
+                                        </div>
                                         @if ($errors->has('email'))
                                             <div class="invalid-feedback">
                                                 <strong>{{ $errors->first('email') }}</strong>
@@ -225,7 +228,7 @@
 
                                 <div class="form-group row col-xl-8 col-lg-8 m-auto">
                                     <div class="flex-column w-100 mt-4">
-                                        <button type="submit" class="btn btn-purple w-60">
+                                        <button id="sign" type="submit" class="btn btn-purple w-60">
                                             Sign up
                                         </button>
                                     </div>
@@ -251,3 +254,47 @@
 
 
 @endsection
+
+<script>
+
+    window.onload = function(){
+
+        function isEmail(email) {
+
+            var count = (email.match(/.com./g) || []).length
+
+            return count;
+        }
+
+        function isEmail_atrate(email) {
+
+            var count = (email.match(/@/g) || []).length
+
+            return count;
+        }
+
+        $("#email").on('keyup', function(){
+            
+            // console.log(isEmail($(this).val()));
+            
+            if(isEmail($(this).val()) >= 1 || isEmail_atrate($(this).val()) > 1){
+                $("#sign").attr('disabled', true);
+                $("#email-error").attr("class", "text-danger");
+                $("#email-error").html("Not valid email");
+            }else if(isEmail($(this).val()) == 0 && isEmail_atrate($(this).val()) == 1){
+                $("#sign").attr('disabled', false);
+                $("#email-error").attr("class", "text-success");
+                $("#email-error").html("It is a valid email");
+            }
+
+            if($(this).val() == ""){
+                $("#email-error").attr("hidden", true);
+            }else{
+                $("#email-error").attr("hidden", false);
+            }
+
+        });
+
+    }
+
+</script>
