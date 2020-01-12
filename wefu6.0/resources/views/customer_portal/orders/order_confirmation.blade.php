@@ -110,6 +110,17 @@
                                             {{$address->user->phone_no}}
                                         </th>
                                     </tr>
+                                    <tr>
+                                        {{-- <form action="" method="post">
+                                            <td>
+                                                <input type="text">
+                                            </td>
+                                        </form> --}}
+                                        <td>
+                                            <a href="{{route('profile', $address->user->username)}}" class="btn btn-primary">Edit Profile Information</a>
+                                        </td>
+                                    </tr>
+
                                 </table>
         
                             </div>
